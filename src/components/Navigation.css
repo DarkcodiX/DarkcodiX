@@ -1,0 +1,120 @@
+.navigation-simple {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 30px 5%;
+  pointer-events: none;
+}
+
+.nav-simple-container {
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: auto;
+}
+
+/* Left Side - Logo/Name */
+.nav-left {
+  display: flex;
+  align-items: center;
+}
+
+.nav-logo-text {
+  font-family: var(--heading-font);
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.nav-logo-text:hover {
+  color: var(--accent-color);
+}
+
+/* Right Side - CTA */
+.nav-right {
+  display: flex;
+  align-items: center;
+}
+
+.nav-cta-link {
+  font-family: var(--mono-font);
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+  color: var(--text-primary);
+  text-decoration: none;
+  padding: 12px 28px;
+  border: 2px solid var(--text-primary);
+  border-radius: 30px;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.speaker-icon {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
+}
+
+.nav-cta-link:hover {
+  background: var(--accent-color);
+  border-color: var(--accent-color);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3);
+}
+
+.nav-cta-link:hover .speaker-icon {
+  transform: scale(1.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .navigation-simple {
+    padding: 20px 5%;
+  }
+
+  .nav-logo-text {
+    font-size: 1.2rem;
+  }
+
+  .nav-cta-link {
+    font-size: 0.85rem;
+    padding: 10px 20px;
+    gap: 8px;
+  }
+  
+  .speaker-icon {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navigation-simple {
+    padding: 15px 5%;
+  }
+
+  .nav-logo-text {
+    font-size: 1rem;
+  }
+
+  .nav-cta-link {
+    font-size: 0.8rem;
+    padding: 8px 16px;
+    gap: 6px;
+  }
+  
+  .speaker-icon {
+    width: 16px;
+    height: 16px;
+  }
+}
