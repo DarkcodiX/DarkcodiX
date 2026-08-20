@@ -13,20 +13,20 @@ const CustomCursor = () => {
 
     const cursor = cursorRef.current;
     const cursorDot = cursorDotRef.current;
+    if (!cursor || !cursorDot) return;
+
+    // Use gsap.quickTo for ultra-smooth performance without instance reallocation
+    const xToRing = gsap.quickTo(cursor, 'x', { duration: 0.35, ease: 'power3.out' });
+    const yToRing = gsap.quickTo(cursor, 'y', { duration: 0.35, ease: 'power3.out' });
+
+    const xToDot = gsap.quickTo(cursorDot, 'x', { duration: 0.08, ease: 'power1.out' });
+    const yToDot = gsap.quickTo(cursorDot, 'y', { duration: 0.08, ease: 'power1.out' });
 
     const moveCursor = (e) => {
-      gsap.to(cursor, {
-        x: e.clientX,
-        y: e.clientY,
-        duration: 0.5,
-        ease: 'power2.out',
-      });
-
-      gsap.to(cursorDot, {
-        x: e.clientX,
-        y: e.clientY,
-        duration: 0.1,
-      });
+      xToRing(e.clientX);
+      yToRing(e.clientY);
+      xToDot(e.clientX);
+      yToDot(e.clientY);
     };
 
     const handleMouseDown = (e) => {
@@ -58,7 +58,7 @@ const CustomCursor = () => {
     document.addEventListener('mousedown', handleMouseDown);
     document.addEventListener('mouseup', handleMouseUp);
 
-    // Handle hover states
+    // Standard hover states
     const handleMouseEnter = () => {
       setIsHovering(true);
       gsap.to(cursor, {
@@ -79,15 +79,29 @@ const CustomCursor = () => {
       });
     };
 
-    // Add event listeners to interactive elements
-    const interactiveElements = document.querySelectorAll(
-      'a, button, input, textarea, select, .hoverable, .character-container'
-    );
+    // Character container hover effect - larger magnetic halo ring
+    const handleCharMouseEnter = () => {
+      setIsHovering(true);
+      gsap.to(cursor, {
+        scale: 2.2,
+        backgroundColor: 'rgba(99, 102, 241, 0.15)',
+        borderColor: 'rgba(99, 102, 241, 0.9)',
+        duration: 0.35,
+        ease: 'power2.out',
+      });
+    };
 
+    const interactiveElements = document.querySelectorAll('a, button, input, textarea, select, .hoverable');
     interactiveElements.forEach((el) => {
       el.addEventListener('mouseenter', handleMouseEnter);
       el.addEventListener('mouseleave', handleMouseLeave);
     });
+
+    const charContainer = document.querySelector('.character-container');
+    if (charContainer) {
+      charContainer.addEventListener('mouseenter', handleCharMouseEnter);
+      charContainer.addEventListener('mouseleave', handleMouseLeave);
+    }
 
     return () => {
       document.removeEventListener('mousemove', moveCursor);
@@ -98,6 +112,11 @@ const CustomCursor = () => {
         el.removeEventListener('mouseenter', handleMouseEnter);
         el.removeEventListener('mouseleave', handleMouseLeave);
       });
+
+      if (charContainer) {
+        charContainer.removeEventListener('mouseenter', handleCharMouseEnter);
+        charContainer.removeEventListener('mouseleave', handleMouseLeave);
+      }
 
       document.body.classList.remove('custom-cursor');
     };

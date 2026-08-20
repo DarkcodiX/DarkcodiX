@@ -28,7 +28,7 @@
 }
 
 .hero-text-wrapper {
-  animation: fadeInScale 1.2s ease-out 0.3s backwards;
+  position: relative;
 }
 
 .hero-title {
@@ -75,7 +75,7 @@
   bottom: 40px;
   right: 40px;
   z-index: 10;
-  animation: fadeIn 1.5s ease-out 1.2s backwards;
+  opacity: 0;
 }
 
 .tagline-badge {
@@ -139,6 +139,7 @@
   align-items: flex-end;
   justify-content: center; /* Center character */
   z-index: 2;
+  perspective: 1000px; /* 3D perspective for cursor tilt */
 }
 
 /* Character image - full display, bottom aligned */
@@ -151,6 +152,8 @@
   user-select: none;
   -webkit-user-drag: none;
   display: block;
+  transform-style: preserve-3d;
+  will-change: transform;
 }
 
 /* Responsive adjustments */

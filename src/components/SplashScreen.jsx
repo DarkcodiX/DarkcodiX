@@ -96,7 +96,7 @@ const SplashScreen = ({ onComplete }) => {
 
     // Scene setup - transparent with light fog
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xffffff); // White bg for splash
+    scene.background = null; // Transparent so landing page background shows through
     scene.fog = new THREE.FogExp2(0xffffff, 0.15);
     sceneRef.current = scene;
 
@@ -111,7 +111,7 @@ const SplashScreen = ({ onComplete }) => {
 
     const renderer = new THREE.WebGLRenderer({ 
       antialias: true,
-      alpha: false // No transparency needed!
+      alpha: true // Transparent canvas
     });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -495,22 +495,19 @@ const SplashScreen = ({ onComplete }) => {
             onComplete: () => {
               console.log('✅ ALL clouds moved + ZOOM done!');
               
-              // TRIGGER LANDING CONTENT REVEAL - RIGHT WHEN CLOUDS FINISH!
-              if (onComplete) {
-                onComplete(); // Signal App.jsx to start content reveal
-              }
+              // Fade out splash screen overlay smoothly, then signal landing page reveal!
+              gsap.to('.splash-screen', {
+                opacity: 0,
+                duration: 0.3,
+                ease: 'power2.out',
+                onComplete: () => {
+                  if (onComplete) {
+                    onComplete(); // Signal App.jsx to start content reveal
+                  }
+                }
+              });
             }
           });
-          
-          // Start splash fade at same time as content reveal
-          setTimeout(() => {
-            console.log('🎬 Starting final fade (ultra fast)...');
-            gsap.to('.splash-screen', {
-              opacity: 0,
-              duration: 0.25,
-              ease: 'power2.out'
-            });
-          }, 2500);
         }, 600);
       }, 1000);
     }

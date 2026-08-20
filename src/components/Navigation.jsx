@@ -2,17 +2,33 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import './Navigation.css';
 
-const Navigation = () => {
+const Navigation = ({ startAnimation = false }) => {
   const navRef = useRef(null);
 
+  // Set initial hidden state on mount
   useEffect(() => {
-    // Animate on load
-    gsap.fromTo(
-      navRef.current,
-      { y: -50, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1, delay: 0.5, ease: 'power3.out' }
-    );
+    if (navRef.current) {
+      gsap.set(navRef.current, { y: -30, opacity: 0 });
+    }
   }, []);
+
+  // Animate down when startAnimation signal is received
+  useEffect(() => {
+    if (startAnimation && navRef.current) {
+      console.log('✨ Navigation reveal starting');
+      gsap.fromTo(
+        navRef.current,
+        { y: -30, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: 'power2.out',
+          delay: 0.1,
+        }
+      );
+    }
+  }, [startAnimation]);
 
   return (
     <nav ref={navRef} className="navigation-simple">

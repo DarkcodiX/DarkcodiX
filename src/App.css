@@ -10,8 +10,8 @@ nav {
 }
 
 /* Custom cursor hidden initially */
-.custom-cursor,
-.custom-cursor-follower {
+.custom-cursor-ring,
+.custom-cursor-dot {
   opacity: 0;
 }
 

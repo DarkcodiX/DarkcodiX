@@ -58,25 +58,23 @@ function Home() {
 
   return (
     <div className="app">
-      {/* Splash on TOP */}
-      {showSplash && <SplashScreen onComplete={handleSplashComplete} />}
+      {/* Landing page - loaded in background from start */}
+      <div className={`landing-content ${startContentAnimation ? 'visible' : 'behind-splash'}`}>
+        <CustomCursor />
+        <Navigation startAnimation={startContentAnimation} />
 
-      {/* Landing page - ONLY render after splash! */}
-      {!showSplash && (
-        <div className="landing-content">
-          <CustomCursor />
-          <Navigation />
-
-          <div id="smooth-wrapper">
-            <div id="smooth-content">
-              <CharacterReveal startAnimation={startContentAnimation} />
-              <About />
-              <Projects />
-              <Contact />
-            </div>
+        <div id="smooth-wrapper">
+          <div id="smooth-content">
+            <CharacterReveal startAnimation={startContentAnimation} />
+            <About />
+            <Projects />
+            <Contact />
           </div>
         </div>
-      )}
+      </div>
+
+      {/* Splash overlay on TOP */}
+      {showSplash && <SplashScreen onComplete={handleSplashComplete} />}
     </div>
   );
 }
