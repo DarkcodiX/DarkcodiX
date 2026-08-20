@@ -4,6 +4,34 @@
   min-height: 100vh;
 }
 
+/* Navigation hidden initially */
+nav {
+  opacity: 0;
+}
+
+/* Custom cursor hidden initially */
+.custom-cursor,
+.custom-cursor-follower {
+  opacity: 0;
+}
+
+/* Landing page - bg visible, content hidden */
+.landing-content {
+  position: relative;
+  opacity: 1 !important; /* BG visible */
+  pointer-events: none;
+}
+
+.landing-content.behind-splash {
+  opacity: 1 !important;
+  pointer-events: none;
+}
+
+.landing-content.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
 /* ScrollSmoother required structure */
 #smooth-wrapper {
   overflow: hidden;

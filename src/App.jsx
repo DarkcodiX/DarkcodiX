@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -10,6 +10,7 @@ import About from './components/About';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import CloudTest from './components/CloudTest';
+import SplashScreen from './components/SplashScreen';
 import './App.css';
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
@@ -27,35 +28,27 @@ function App() {
 
 function Home() {
   const smootherRef = useRef(null);
+  const [showSplash, setShowSplash] = useState(true);
+  const [startContentAnimation, setStartContentAnimation] = useState(false);
 
-  useEffect(() => {
-    // Loading animation
-    gsap.to('.loading-screen', {
-      opacity: 0,
-      duration: 1,
-      delay: 0.5,
-      onComplete: () => {
-        const loadingScreen = document.querySelector('.loading-screen');
-        if (loadingScreen) {
-          loadingScreen.style.display = 'none';
-        }
-      },
-    });
+  const handleSplashComplete = () => {
+    console.log('🎯 Splash complete! Starting content animation...');
+    setShowSplash(false);
+    setStartContentAnimation(true); // Trigger character animation!
 
-    // Initialize ScrollSmoother after loading
     setTimeout(() => {
       smootherRef.current = ScrollSmoother.create({
-        smooth: 1.5,              // Smoothness (higher = smoother but more lag)
-        effects: true,            // Enable data-speed effects
-        smoothTouch: 0.1,         // Smooth on mobile (0.1 = subtle)
-        normalizeScroll: true,    // Prevent address bar hide/show issues
-        ignoreMobileResize: true, // Better mobile performance
+        smooth: 1.5,
+        effects: true,
+        smoothTouch: 0.1,
+        normalizeScroll: true,
+        ignoreMobileResize: true,
       });
-
-      // Refresh ScrollTrigger after smoother is ready
       ScrollTrigger.refresh();
-    }, 600);
+    }, 50);
+  };
 
+  useEffect(() => {
     return () => {
       if (smootherRef.current) {
         smootherRef.current.kill();
@@ -65,25 +58,25 @@ function Home() {
 
   return (
     <div className="app">
-      <div className="loading-screen">
-        <div className="loader">
-          <div className="loader-ring"></div>
-          <div className="loader-text">Loading...</div>
-        </div>
-      </div>
+      {/* Splash on TOP */}
+      {showSplash && <SplashScreen onComplete={handleSplashComplete} />}
 
-      <CustomCursor />
-      <Navigation />
+      {/* Landing page - ONLY render after splash! */}
+      {!showSplash && (
+        <div className="landing-content">
+          <CustomCursor />
+          <Navigation />
 
-      {/* ScrollSmoother wrapper - REQUIRED */}
-      <div id="smooth-wrapper">
-        <div id="smooth-content">
-          <CharacterReveal />
-          <About />
-          <Projects />
-          <Contact />
+          <div id="smooth-wrapper">
+            <div id="smooth-content">
+              <CharacterReveal startAnimation={startContentAnimation} />
+              <About />
+              <Projects />
+              <Contact />
+            </div>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
+import { gsap } from 'gsap';
 import './CloudTest.css';
 
 const CloudTest = () => {
@@ -11,7 +12,7 @@ const CloudTest = () => {
     // Scene setup
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x000000);
-    scene.fog = new THREE.Fog(0x000000, 5, 15);
+    scene.fog = new THREE.Fog(0x000000, 10, 25);
 
     const camera = new THREE.PerspectiveCamera(
       75,
@@ -35,16 +36,33 @@ const CloudTest = () => {
     canvas.height = 256;
     const ctx = canvas.getContext('2d');
 
-    // Create fluffy cloud texture with better blending
-    const gradient = ctx.createRadialGradient(128, 128, 0, 128, 128, 128);
+    // Create very bright, light cloud texture for daytime
+    const gradient = ctx.createRadialGradient(128, 128, 20, 128, 128, 128);
     gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
-    gradient.addColorStop(0.2, 'rgba(250, 250, 250, 0.95)');
-    gradient.addColorStop(0.4, 'rgba(240, 240, 240, 0.7)');
-    gradient.addColorStop(0.6, 'rgba(230, 230, 230, 0.4)');
-    gradient.addColorStop(0.8, 'rgba(220, 220, 220, 0.15)');
+    gradient.addColorStop(0.2, 'rgba(255, 255, 255, 0.95)');
+    gradient.addColorStop(0.35, 'rgba(252, 252, 255, 0.8)');
+    gradient.addColorStop(0.5, 'rgba(250, 250, 254, 0.65)');
+    gradient.addColorStop(0.65, 'rgba(248, 248, 252, 0.5)');
+    gradient.addColorStop(0.8, 'rgba(245, 245, 250, 0.3)');
+    gradient.addColorStop(0.92, 'rgba(243, 243, 248, 0.12)');
     gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
     
     ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, 256, 256);
+    
+    // Add soft blur layers for natural softness
+    ctx.filter = 'blur(10px)';
+    ctx.globalAlpha = 0.6;
+    ctx.fillRect(0, 0, 256, 256);
+    
+    ctx.filter = 'blur(5px)';
+    ctx.globalAlpha = 0.45;
+    
+    const gradient2 = ctx.createRadialGradient(128, 128, 40, 128, 128, 110);
+    gradient2.addColorStop(0, 'rgba(255, 255, 255, 0.7)');
+    gradient2.addColorStop(0.6, 'rgba(252, 252, 255, 0.4)');
+    gradient2.addColorStop(1, 'rgba(255, 255, 255, 0)');
+    ctx.fillStyle = gradient2;
     ctx.fillRect(0, 0, 256, 256);
 
     const cloudTexture = new THREE.CanvasTexture(canvas);
@@ -52,67 +70,75 @@ const CloudTest = () => {
     // Create cloud group
     const cloudGroup = new THREE.Group();
 
-    // Create multiple cloud spheres for realistic look with better blending
+    // Create cloud material - very bright and light
     const cloudMaterial = new THREE.MeshLambertMaterial({
       map: cloudTexture,
       transparent: true,
-      opacity: 0.9,
+      opacity: 0.95,
       depthWrite: false,
       side: THREE.DoubleSide,
       blending: THREE.NormalBlending,
       color: 0xffffff,
+      emissive: 0x000000,
+      emissiveIntensity: 0,
     });
 
-    // Create main cloud structure - tighter overlapping for seamless look
+    // Create wider cloud with balanced height - more horizontal spread
     const cloudPositions = [
-      // Main body - center (largest, core)
-      { x: 0, y: 0, z: 0, scale: 2.2 },
+      // Dense center core - main body (balanced)
+      { x: 0, y: 0, z: 0, scale: 1.5 },
+      { x: 0.15, y: 0.08, z: 0.1, scale: 1.4 },
+      { x: -0.15, y: -0.06, z: -0.1, scale: 1.35 },
+      { x: 0.08, y: -0.09, z: 0.15, scale: 1.3 },
       
-      // Inner core layer - complete overlap
-      { x: 0, y: 0, z: 0, scale: 2.0 },
-      { x: 0.1, y: 0.1, z: 0, scale: 1.9 },
-      { x: -0.1, y: -0.1, z: 0, scale: 1.9 },
+      // Extended left side - wider spread
+      { x: -0.9, y: 0.12, z: 0.05, scale: 1.3 },
+      { x: -1.5, y: 0.15, z: 0.15, scale: 1.2 },
+      { x: -2.1, y: 0.13, z: -0.08, scale: 1.05 },
+      { x: -2.7, y: 0.09, z: 0.1, scale: 0.9 },
+      { x: -3.2, y: 0.06, z: -0.05, scale: 0.75 },
       
-      // Left side - seamless connection
-      { x: -1.0, y: 0.15, z: 0, scale: 1.7 },
-      { x: -1.5, y: 0, z: 0.1, scale: 1.5 },
-      { x: -2.0, y: 0.1, z: -0.1, scale: 1.3 },
-      { x: -2.3, y: 0.05, z: 0, scale: 1.0 },
+      // Extended right side - wider spread
+      { x: 0.95, y: 0.13, z: -0.08, scale: 1.25 },
+      { x: 1.6, y: 0.16, z: 0.12, scale: 1.15 },
+      { x: 2.2, y: 0.14, z: -0.1, scale: 1.0 },
+      { x: 2.8, y: 0.11, z: 0.05, scale: 0.85 },
+      { x: 3.3, y: 0.08, z: 0.08, scale: 0.7 },
       
-      // Right side - seamless connection
-      { x: 1.0, y: 0.2, z: -0.05, scale: 1.8 },
-      { x: 1.6, y: 0.1, z: 0.15, scale: 1.6 },
-      { x: 2.1, y: 0.15, z: 0, scale: 1.4 },
-      { x: 2.5, y: 0.1, z: -0.1, scale: 1.1 },
+      // Top puffs - moderate height
+      { x: -0.35, y: 0.68, z: 0.08, scale: 1.15 },
+      { x: 0.4, y: 0.75, z: -0.1, scale: 1.05 },
+      { x: 0.05, y: 0.95, z: 0.05, scale: 0.95 },
+      { x: -0.75, y: 0.82, z: 0.12, scale: 0.85 },
+      { x: 0.8, y: 0.85, z: -0.08, scale: 0.8 },
+      { x: 0.15, y: 0.45, z: 0.18, scale: 1.1 },
+      { x: -0.5, y: 1.1, z: 0, scale: 0.75 },
+      { x: 0.6, y: 1.05, z: 0.1, scale: 0.7 },
       
-      // Top puffs - overlapping with center
-      { x: -0.3, y: 0.9, z: 0, scale: 1.5 },
-      { x: 0.4, y: 1.0, z: 0.1, scale: 1.4 },
-      { x: 0, y: 1.3, z: -0.05, scale: 1.2 },
-      { x: -0.8, y: 1.1, z: 0.05, scale: 1.1 },
-      { x: 0.9, y: 1.15, z: -0.1, scale: 1.0 },
-      { x: 0.15, y: 0.65, z: 0, scale: 1.3 },
+      // Bottom base - grounded and full
+      { x: -0.55, y: -0.42, z: -0.15, scale: 1.25 },
+      { x: 0.6, y: -0.38, z: 0.2, scale: 1.15 },
+      { x: 0.05, y: -0.48, z: 0.08, scale: 1.1 },
+      { x: -1.1, y: -0.32, z: 0.1, scale: 1.0 },
+      { x: 1.15, y: -0.3, z: -0.12, scale: 0.95 },
+      { x: -0.25, y: -0.28, z: -0.25, scale: 1.05 },
+      { x: 0.3, y: -0.25, z: 0.28, scale: 1.0 },
+      { x: -1.8, y: -0.28, z: 0.05, scale: 0.9 },
+      { x: 1.9, y: -0.26, z: -0.08, scale: 0.88 },
       
-      // Bottom base - complete coverage
-      { x: -0.6, y: -0.6, z: -0.2, scale: 1.6 },
-      { x: 0.7, y: -0.5, z: 0.3, scale: 1.5 },
-      { x: 0, y: -0.7, z: 0.1, scale: 1.4 },
-      { x: -1.2, y: -0.4, z: 0, scale: 1.3 },
-      { x: 1.3, y: -0.45, z: -0.1, scale: 1.3 },
+      // Middle volume - depth and fullness
+      { x: -0.5, y: 0.22, z: 0.35, scale: 1.05 },
+      { x: 0.55, y: 0.18, z: -0.38, scale: 0.98 },
+      { x: -0.85, y: 0.35, z: 0.25, scale: 0.9 },
+      { x: 0.9, y: 0.38, z: -0.28, scale: 0.88 },
+      { x: 0.25, y: 0.28, z: 0.45, scale: 0.85 },
+      { x: -0.3, y: 0.3, z: -0.42, scale: 0.82 },
       
-      // Middle fill - complete overlap
-      { x: -0.5, y: 0.3, z: 0.4, scale: 1.4 },
-      { x: 0.6, y: 0.2, z: -0.4, scale: 1.3 },
-      { x: -1.0, y: 0.5, z: 0.25, scale: 1.2 },
-      { x: 1.1, y: 0.55, z: -0.25, scale: 1.2 },
-      { x: 0.2, y: 0.4, z: 0.5, scale: 1.1 },
-      { x: -0.3, y: 0.35, z: -0.5, scale: 1.1 },
-      
-      // Additional volume for seamless blend
-      { x: -0.7, y: -0.2, z: 0.5, scale: 1.2 },
-      { x: 0.8, y: -0.15, z: -0.5, scale: 1.2 },
-      { x: 0, y: 0.2, z: 0.6, scale: 1.0 },
-      { x: 0, y: 0.15, z: -0.6, scale: 1.0 },
+      // Additional wide extensions
+      { x: -2.4, y: 0.25, z: 0.2, scale: 0.75 },
+      { x: 2.5, y: 0.28, z: -0.18, scale: 0.73 },
+      { x: -3.5, y: 0.12, z: 0.1, scale: 0.65 },
+      { x: 3.6, y: 0.15, z: -0.12, scale: 0.63 },
     ];
 
     cloudPositions.forEach(pos => {
@@ -124,22 +150,24 @@ const CloudTest = () => {
 
     scene.add(cloudGroup);
 
-    // Add soft lighting for realistic cloud appearance
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+    // Very bright daytime lighting - maximum illumination
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
     scene.add(ambientLight);
 
-    const directionalLight1 = new THREE.DirectionalLight(0xffffff, 0.6);
-    directionalLight1.position.set(5, 5, 5);
-    scene.add(directionalLight1);
+    // Strong bright sunlight from above
+    const sunLight = new THREE.DirectionalLight(0xffffff, 0.7);
+    sunLight.position.set(8, 10, 6);
+    scene.add(sunLight);
 
-    const directionalLight2 = new THREE.DirectionalLight(0xe8e8ff, 0.4);
-    directionalLight2.position.set(-5, -3, -5);
-    scene.add(directionalLight2);
-
-    // Add rim light for depth
-    const rimLight = new THREE.DirectionalLight(0xffffff, 0.5);
-    rimLight.position.set(0, 0, -5);
-    scene.add(rimLight);
+    // Bright fill light 
+    const fillLight = new THREE.DirectionalLight(0xffffff, 0.5);
+    fillLight.position.set(-6, -4, -5);
+    scene.add(fillLight);
+    
+    // Additional top light for extra brightness
+    const topLight = new THREE.DirectionalLight(0xffffff, 0.4);
+    topLight.position.set(0, 15, 0);
+    scene.add(topLight);
 
     // Mouse interaction - removed
     // No mouse events needed for static cloud
@@ -152,6 +180,24 @@ const CloudTest = () => {
     };
 
     animate();
+
+    // TEST ANIMATION - Move cloud after 2 seconds
+    setTimeout(() => {
+      console.log('🚀 Starting cloud animation!');
+      console.log('Initial position:', cloudGroup.position.x);
+      
+      gsap.to(cloudGroup.position, {
+        x: 10,
+        duration: 2,
+        ease: 'power2.inOut',
+        onUpdate: () => {
+          console.log('Moving:', cloudGroup.position.x);
+        },
+        onComplete: () => {
+          console.log('✅ Animation complete! Final:', cloudGroup.position.x);
+        }
+      });
+    }, 2000);
 
     // Handle resize
     const handleResize = () => {

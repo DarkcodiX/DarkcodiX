@@ -6,34 +6,22 @@ import './CharacterReveal.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const CharacterReveal = () => {
+const CharacterReveal = ({ startAnimation = false }) => {
   const sectionRef = useRef(null);
   const imageRef = useRef(null);
+  const textRef = useRef(null);
 
   useEffect(() => {
     const section = sectionRef.current;
     const image = imageRef.current;
 
-    // Initial fade-in animation
-    gsap.fromTo(
-      image,
-      { opacity: 0, scale: 0.95 },
-      { 
-        opacity: 1, 
-        scale: 1, 
-        duration: 1.5, 
-        ease: 'power3.out',
-        delay: 0.3
-      }
-    );
-
-    // Pin the hero section - next section will overlap it
+    // Pin the hero section
     ScrollTrigger.create({
       trigger: section,
       start: 'top top',
-      end: '+=100%', // Amount of overscroll needed
+      end: '+=100%',
       pin: true,
-      pinSpacing: false, // FALSE = next section overlaps
+      pinSpacing: false,
       scrub: true,
       anticipatePin: 1,
     });
@@ -43,9 +31,34 @@ const CharacterReveal = () => {
     };
   }, []);
 
+  // Staggered reveal when animation starts
+  useEffect(() => {
+    if (startAnimation) {
+      // Header fade from top
+      gsap.fromTo('nav', 
+        { opacity: 0, y: -30 },
+        { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out', delay: 0.1 }
+      );
+
+      // Text staggered reveal ONLY (character already visible!)
+      if (textRef.current) {
+        const textElements = textRef.current.querySelectorAll('h1, p, .hero-actions');
+        gsap.fromTo(textElements, 
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out', delay: 0.3, stagger: 0.15 }
+        );
+      }
+
+      // Cursor fade
+      gsap.fromTo('.custom-cursor, .custom-cursor-follower', 
+        { opacity: 0 },
+        { opacity: 1, duration: 0.5, delay: 0.2 }
+      );
+    }
+  }, [startAnimation]);
+
   return (
     <div ref={sectionRef} className="character-reveal-section hero-panel">
-      {/* WebGL Background Animation */}
       <WebGLBackground />
       
       {/* Hero Text Content */}
