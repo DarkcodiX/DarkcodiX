@@ -34,27 +34,40 @@ const Navigation = ({ startAnimation = false }) => {
     }
   }, [startAnimation]);
 
-  // Hide CTA button when About section scrolls into view
+  // Hide navigation header when entering About section, and re-appear when scrolling back up to Hero
   useEffect(() => {
     const aboutSection = document.querySelector('.about-section');
-    if (!aboutSection || !navRightRef.current) return;
+    if (!aboutSection || !navRef.current) return;
 
     const ctx = gsap.context(() => {
-      gsap.to(navRightRef.current, {
-        y: -40,
-        opacity: 0,
-        ease: 'power2.inOut',
-        scrollTrigger: {
-          trigger: aboutSection,
-          start: 'top 80%',
-          end: 'top 20%',
-          scrub: 0.5,
+      ScrollTrigger.create({
+        trigger: aboutSection,
+        start: 'top 15%',
+        onEnter: () => {
+          gsap.to(navRef.current, {
+            y: -100,
+            opacity: 0,
+            duration: 0.4,
+            ease: 'power2.inOut',
+            overwrite: 'auto',
+          });
+        },
+        onLeaveBack: () => {
+          gsap.to(navRef.current, {
+            y: 0,
+            opacity: 1,
+            duration: 0.4,
+            ease: 'power2.out',
+            overwrite: 'auto',
+          });
         },
       });
     });
 
     return () => ctx.revert();
   }, []);
+
+
 
   return (
     <nav ref={navRef} className="navigation-simple">
