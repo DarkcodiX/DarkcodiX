@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -31,12 +31,22 @@ function Home() {
   const [showSplash, setShowSplash] = useState(true);
   const [startContentAnimation, setStartContentAnimation] = useState(false);
 
+  // Force scroll to top before initial paint & disable browser automatic scroll restoration
+  useLayoutEffect(() => {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+  }, []);
+
   const handleSplashComplete = () => {
     console.log('🎯 Splash complete! Starting content animation...');
+    window.scrollTo(0, 0);
     setShowSplash(false);
     setStartContentAnimation(true); // Trigger character animation!
 
     setTimeout(() => {
+      window.scrollTo(0, 0);
       smootherRef.current = ScrollSmoother.create({
         smooth: 1.5,
         effects: true,

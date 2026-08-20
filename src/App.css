@@ -23,13 +23,15 @@ nav {
 }
 
 .landing-content.behind-splash {
-  opacity: 1 !important;
   pointer-events: none;
 }
 
-.landing-content.visible {
-  opacity: 1;
-  pointer-events: all;
+.landing-content.behind-splash .hero-title,
+.landing-content.behind-splash .hero-subtitle,
+.landing-content.behind-splash .hero-description,
+.landing-content.behind-splash .bottom-right-element,
+.landing-content.behind-splash nav {
+  opacity: 0 !important;
 }
 
 /* ScrollSmoother required structure */
