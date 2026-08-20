@@ -12,12 +12,13 @@
 
 .projects-title {
   font-family: var(--heading-font);
+  font-optical-sizing: auto;
   font-size: clamp(3rem, 6vw, 5rem);
-  font-weight: 800;
+  font-weight: 500;
   color: var(--text-primary);
   margin-bottom: 20px;
   text-transform: uppercase;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.04em;
 }
 
 .projects-subtitle {

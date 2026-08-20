@@ -2,7 +2,6 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import WebGLBackground from './WebGLBackground';
-import Character3D from './Character3D';
 import './CharacterReveal.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -83,56 +82,6 @@ const CharacterReveal = ({ startAnimation = false }) => {
     }
   }, [startAnimation]);
 
-  // Interactive 3D mouse tilt & parallax follow using gsap.quickTo & gsap.utils.interpolate
-  useEffect(() => {
-    const characterImage = imageRef.current;
-    const container = sectionRef.current;
-    if (!characterImage || !container) return;
-
-    // Create lightweight quickTo animation setters
-    const xTo = gsap.quickTo(characterImage, 'x', { duration: 0.6, ease: 'power3.out' });
-    const yTo = gsap.quickTo(characterImage, 'y', { duration: 0.6, ease: 'power3.out' });
-    const rotateXTo = gsap.quickTo(characterImage, 'rotationX', { duration: 0.6, ease: 'power3.out' });
-    const rotateYTo = gsap.quickTo(characterImage, 'rotationY', { duration: 0.6, ease: 'power3.out' });
-
-    // GSAP interpolation helpers mapping normalized cursor position (0 to 1) to tilt ranges
-    const interpolateX = gsap.utils.interpolate(-20, 20);
-    const interpolateY = gsap.utils.interpolate(-12, 12);
-    const interpolateRotateX = gsap.utils.interpolate(8, -8);
-    const interpolateRotateY = gsap.utils.interpolate(-10, 10);
-
-    const handleMouseMove = (e) => {
-      const rect = container.getBoundingClientRect();
-      const normX = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-      const normY = Math.max(0, Math.min(1, (e.clientY - rect.top) / rect.height));
-
-      const targetX = interpolateX(normX);
-      const targetY = interpolateY(normY);
-      const targetRotX = interpolateRotateX(normY);
-      const targetRotY = interpolateRotateY(normX);
-
-      xTo(targetX);
-      yTo(targetY);
-      rotateXTo(targetRotX);
-      rotateYTo(targetRotY);
-    };
-
-    const handleMouseLeave = () => {
-      xTo(0);
-      yTo(0);
-      rotateXTo(0);
-      rotateYTo(0);
-    };
-
-    container.addEventListener('mousemove', handleMouseMove);
-    container.addEventListener('mouseleave', handleMouseLeave);
-
-    return () => {
-      container.removeEventListener('mousemove', handleMouseMove);
-      container.removeEventListener('mouseleave', handleMouseLeave);
-    };
-  }, []);
-
   return (
     <div ref={sectionRef} className="character-reveal-section hero-panel">
       <WebGLBackground />
@@ -149,8 +98,14 @@ const CharacterReveal = ({ startAnimation = false }) => {
       </div>
       
       <div className="character-container">
-        {/* Interactive 3D WebGL Character Model */}
-        <Character3D />
+        {/* Character image - stays fixed, no animation */}
+        <img
+          ref={imageRef}
+          src="/character.jpeg"
+          alt="Character"
+          className="character-base-image"
+          loading="eager"
+        />
       </div>
 
       {/* Bottom Right Element */}

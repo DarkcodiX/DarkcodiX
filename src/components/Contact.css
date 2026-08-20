@@ -23,11 +23,12 @@
 
 .contact-title {
   font-family: var(--heading-font);
+  font-optical-sizing: auto;
   font-size: clamp(2.5rem, 6vw, 4.5rem);
-  font-weight: 800;
+  font-weight: 500;
   color: var(--text-primary);
   text-transform: uppercase;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.04em;
   line-height: 1.2;
 }
 
