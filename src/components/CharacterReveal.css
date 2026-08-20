@@ -142,18 +142,24 @@
   perspective: 1000px; /* 3D perspective for cursor tilt */
 }
 
-/* Character image - full display, bottom aligned */
-.character-base-image {
+/* Interactive 3D WebGL Canvas Wrapper */
+.character-3d-canvas-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  max-width: 100%;
   height: 100%;
-  object-fit: contain;
-  object-position: center bottom;
-  user-select: none;
-  -webkit-user-drag: none;
-  display: block;
-  transform-style: preserve-3d;
-  will-change: transform;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.character-3d-canvas-wrapper canvas {
+  width: 100% !important;
+  height: 100% !important;
+  outline: none;
 }
 
 /* Responsive adjustments */

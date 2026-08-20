@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import WebGLBackground from './WebGLBackground';
+import Character3D from './Character3D';
 import './CharacterReveal.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -148,14 +149,8 @@ const CharacterReveal = ({ startAnimation = false }) => {
       </div>
       
       <div className="character-container">
-        {/* Character image - stays fixed, no animation */}
-        <img
-          ref={imageRef}
-          src="/character.jpeg"
-          alt="Character"
-          className="character-base-image"
-          loading="eager"
-        />
+        {/* Interactive 3D WebGL Character Model */}
+        <Character3D />
       </div>
 
       {/* Bottom Right Element */}
