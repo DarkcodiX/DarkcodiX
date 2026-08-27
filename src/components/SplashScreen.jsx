@@ -124,21 +124,21 @@ const SplashScreen = ({ onRevealStart, onComplete }) => {
     const ctx = canvas.getContext('2d');
 
     const bodyShade = ctx.createRadialGradient(92, 104, 12, 96, 96, 96);
-    bodyShade.addColorStop(0, 'rgba(222, 224, 231, 0.34)');
-    bodyShade.addColorStop(0.45, 'rgba(214, 217, 226, 0.28)');
-    bodyShade.addColorStop(0.78, 'rgba(202, 205, 214, 0.16)');
+    bodyShade.addColorStop(0, 'rgba(184, 188, 198, 0.48)');
+    bodyShade.addColorStop(0.45, 'rgba(170, 175, 188, 0.42)');
+    bodyShade.addColorStop(0.78, 'rgba(150, 156, 170, 0.24)');
     bodyShade.addColorStop(1, 'rgba(255, 255, 255, 0)');
     ctx.fillStyle = bodyShade;
     ctx.fillRect(0, 0, 192, 192);
 
     const gradient = ctx.createRadialGradient(96, 88, 16, 96, 96, 96);
-    gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
-    gradient.addColorStop(0.2, 'rgba(255, 255, 255, 0.95)');
-    gradient.addColorStop(0.35, 'rgba(252, 252, 255, 0.86)');
-    gradient.addColorStop(0.5, 'rgba(244, 245, 249, 0.72)');
-    gradient.addColorStop(0.65, 'rgba(232, 235, 242, 0.56)');
-    gradient.addColorStop(0.8, 'rgba(218, 222, 232, 0.34)');
-    gradient.addColorStop(0.92, 'rgba(205, 209, 220, 0.16)');
+    gradient.addColorStop(0, 'rgba(238, 240, 245, 1)');
+    gradient.addColorStop(0.2, 'rgba(226, 229, 237, 0.96)');
+    gradient.addColorStop(0.35, 'rgba(214, 218, 228, 0.9)');
+    gradient.addColorStop(0.5, 'rgba(198, 203, 216, 0.78)');
+    gradient.addColorStop(0.65, 'rgba(180, 187, 202, 0.62)');
+    gradient.addColorStop(0.8, 'rgba(158, 166, 184, 0.42)');
+    gradient.addColorStop(0.92, 'rgba(138, 146, 164, 0.22)');
     gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
     
     ctx.fillStyle = gradient;
@@ -151,9 +151,9 @@ const SplashScreen = ({ onRevealStart, onComplete }) => {
     ctx.filter = 'blur(4px)';
     ctx.globalAlpha = 0.48;
     const gradient2 = ctx.createRadialGradient(96, 88, 30, 96, 96, 82);
-    gradient2.addColorStop(0, 'rgba(255, 255, 255, 0.78)');
-    gradient2.addColorStop(0.45, 'rgba(252, 252, 255, 0.52)');
-    gradient2.addColorStop(0.72, 'rgba(220, 223, 232, 0.3)');
+    gradient2.addColorStop(0, 'rgba(232, 235, 242, 0.84)');
+    gradient2.addColorStop(0.45, 'rgba(208, 213, 224, 0.6)');
+    gradient2.addColorStop(0.72, 'rgba(166, 174, 190, 0.38)');
     gradient2.addColorStop(1, 'rgba(255, 255, 255, 0)');
     ctx.fillStyle = gradient2;
     ctx.fillRect(0, 0, 192, 192);
@@ -164,10 +164,10 @@ const SplashScreen = ({ onRevealStart, onComplete }) => {
     const cloudMaterial = new THREE.SpriteMaterial({
       map: cloudTexture,
       transparent: true,
-      opacity: 0.94, // Semi-transparent
+      opacity: 0.97, // Semi-transparent
       depthWrite: false,
       blending: THREE.NormalBlending,
-      color: 0xffffff, // Keep /test brightness while texture carries the gray shade.
+      color: 0xe4e6ec, // Slightly darker tint so the cloud volume reads stronger.
     });
 
     // Create large cloud structure (same as /test but bigger)

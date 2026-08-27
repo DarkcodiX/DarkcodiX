@@ -13,17 +13,17 @@ const BLINK_FRAMES = Array.from({ length: 27 }, (_, index) => `ezgif-frame-${Str
 const IDLE_FRAME = BLINK_FRAMES[0];
 const BLINK_FRAME_DURATION = 46;
 const AVAILABLE_FRAMES = DIRECTIONAL_FRAMES;
-const HOT_FRAMES = [20, 45, 70, 100, 122, 145, 162, 180, 208, 235, 260, 285];
+const HOT_FRAMES = [55, 70, 100, 122, 145, 162, 180, 208, 242];
 const LOOK_ANCHORS = [
-  { angle: -Math.PI, frame: 235 },
+  { angle: -Math.PI, frame: 242 },
   { angle: -Math.PI / 2, frame: 180 },
   { angle: 0, frame: 145 },
   { angle: Math.PI / 2, frame: 100 },
-  { angle: Math.PI, frame: 20 },
+  { angle: Math.PI, frame: 55 },
 ];
 
 const getCharacterFramePath = (frame) => (
-  `/cursor-frames/ezgif-frame-${String(frame).padStart(3, '0')}.png?v=cursor-folder-3`
+  `/cursor-frames/ezgif-frame-${String(frame).padStart(3, '0')}.png?v=cursor-folder-9`
 );
 
 const getBlinkFramePath = (frameName) => (
@@ -47,11 +47,11 @@ const getFrameFromAngle = (angle) => {
 
     if (angle >= start.angle && angle <= end.angle) {
       const progress = (angle - start.angle) / (end.angle - start.angle);
-      return start.frame + (end.frame - start.frame) * progress;
+      return clamp(start.frame + (end.frame - start.frame) * progress, 55, 242);
     }
   }
 
-  return CENTER_FRAME;
+  return 55;
 };
 
 const CharacterReveal = ({ startAnimation = false }) => {
