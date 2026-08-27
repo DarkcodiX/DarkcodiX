@@ -14,88 +14,110 @@ const About = () => {
       const section = sectionRef.current;
       if (!section) return;
 
-      // Master ScrollTrigger timeline pinned during About section scroll
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      const shouldPin =
+        !reduceMotion &&
+        !window.matchMedia('(pointer: coarse)').matches &&
+        navigator.hardwareConcurrency > 4;
+
+      if (!shouldPin) {
+        const revealItems = [
+          '.about-kicker',
+          '.about-title',
+          '.about-intro',
+          '.about-stats',
+          '.about-text',
+          '.skills-title',
+          '.skill-item',
+        ];
+
+        gsap.fromTo(
+          revealItems,
+          { autoAlpha: 0, y: 20 },
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.45,
+            ease: 'power2.out',
+            stagger: 0.025,
+            scrollTrigger: {
+              trigger: section,
+              start: 'top 75%',
+              once: true,
+            },
+          }
+        );
+
+        return;
+      }
+
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
-          pin: true,
           start: 'top top',
-          end: '+=200%',
-          scrub: 1,
+          end: '+=165%',
+          pin: true,
+          pinSpacing: true,
+          scrub: 0.8,
           anticipatePin: 1,
-          onEnter: () => {
-            if (videoRef.current) {
-              videoRef.current.play().catch(() => {});
-            }
-          },
+          fastScrollEnd: true,
         },
       });
 
-      // 1. Initial entrance (0.0 to 0.15): Title appears cleanly, video remains 100% constant and visible
       tl.fromTo(
-        '.about-title',
-        { opacity: 0, y: -20 },
-        { opacity: 1, y: 0, duration: 0.15, ease: 'power2.out' },
+        '.about-kicker, .about-title',
+        { autoAlpha: 0, y: 22 },
+        { autoAlpha: 1, y: 0, duration: 0.18, stagger: 0.03, ease: 'none' },
         0
-      );
-
-      // 2. Paragraph 1 reveal (0.20 to 0.40)
-      tl.fromTo(
-        '.about-text.p1',
-        { opacity: 0, y: 40 },
-        { opacity: 1, y: 0, duration: 0.2, ease: 'power2.out' },
-        0.2
-      );
-
-      // 3. Paragraph 2 reveal (0.45 to 0.65)
-      tl.fromTo(
-        '.about-text.p2',
-        { opacity: 0, y: 40 },
-        { opacity: 1, y: 0, duration: 0.2, ease: 'power2.out' },
-        0.45
-      );
-
-      // 4. Paragraph 3 reveal (0.70 to 0.88)
-      tl.fromTo(
-        '.about-text.p3',
-        { opacity: 0, y: 40 },
-        { opacity: 1, y: 0, duration: 0.18, ease: 'power2.out' },
-        0.7
-      );
-
-      // 5. Skills section reveal (0.85 to 0.95)
-      tl.fromTo(
-        '.skills-section',
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.1, ease: 'power2.out' },
-        0.85
-      );
-
-      // 6. Skill items stagger (0.88 to 0.98)
-      tl.fromTo(
-        '.skill-item',
-        { opacity: 0, scale: 0.8 },
-        { opacity: 1, scale: 1, stagger: 0.01, duration: 0.1, ease: 'back.out(1.5)' },
-        0.88
-      );
+      )
+        .fromTo(
+          '.about-intro',
+          { autoAlpha: 0, y: 22 },
+          { autoAlpha: 1, y: 0, duration: 0.2, ease: 'none' },
+          0.14
+        )
+        .fromTo(
+          '.about-stats',
+          { autoAlpha: 0, y: 18 },
+          { autoAlpha: 1, y: 0, duration: 0.2, ease: 'none' },
+          0.28
+        )
+        .fromTo(
+          '.about-text',
+          { autoAlpha: 0, y: 24 },
+          { autoAlpha: 1, y: 0, duration: 0.28, stagger: 0.045, ease: 'none' },
+          0.42
+        )
+        .fromTo(
+          '.skills-section',
+          { autoAlpha: 0, y: 20 },
+          { autoAlpha: 1, y: 0, duration: 0.2, ease: 'none' },
+          0.72
+        )
+        .fromTo(
+          '.skill-item',
+          { autoAlpha: 0, y: 10 },
+          { autoAlpha: 1, y: 0, duration: 0.12, stagger: 0.012, ease: 'none' },
+          0.8
+        );
 
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
+  const playLoopingVideo = () => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    video.play().catch(() => {});
+  };
+
   const skills = [
-    // Web & Mobile
-    'React', 'Next.js', 'React Native', 'Expo Go',
-    'Node.js', 'Express.js', 'Tailwind CSS',
-    // Languages
-    'TypeScript', 'JavaScript', 'Python', 'C/C++',
-    // Databases & APIs
-    'MongoDB', 'Firebase', 'SQL', 'REST APIs',
-    // AI & ML
-    'LLM Integration', 'Machine Learning', 'Speech AI',
-    // Tools
-    'Git', 'GitHub', 'Vercel', 'Figma'
+    'React', 'Next.js', 'React Native', 'Node / Express',
+    'TypeScript', 'Python', 'MongoDB', 'Firebase',
+    'SQL', 'LLM Integration', 'Machine Learning', 'Figma'
   ];
 
   return (
@@ -104,22 +126,49 @@ const About = () => {
         <div className="about-hero-grid">
           {/* Left Column: Heading + Paragraphs */}
           <div className="about-left-col">
-            <h2 className="about-title">About Me</h2>
+            <div className="about-kicker">02 / profile</div>
+            <h2 className="about-title">About me</h2>
+            <p className="about-intro">
+              I build fast product prototypes that connect polished interfaces, AI systems, and production-ready backends.
+            </p>
+            <div className="about-stats" aria-label="Professional highlights">
+              <div className="about-stat">
+                <span className="about-stat-value">2023</span>
+                <span className="about-stat-label">freelance start</span>
+              </div>
+              <div className="about-stat">
+                <span className="about-stat-value">100%</span>
+                <span className="about-stat-label">on-time delivery</span>
+              </div>
+              <div className="about-stat">
+                <span className="about-stat-value">AI</span>
+                <span className="about-stat-label">systems focus</span>
+              </div>
+            </div>
             <div className="about-text-wrapper">
               <p className="about-text p1">
-                An innovative and results-driven Full Stack, Mobile App, and AI Systems Developer 
-                with a proven track record of delivering rapid prototypes and production-ready applications.
+                Full Stack, Mobile App, and AI Systems Developer focused on rapid prototypes 
+                that can mature into production-ready applications.
               </p>
               <p className="about-text p2">
-                Experienced in architecting complex AI pipelines, web platforms, and mobile applications. 
-                Currently pursuing an internship at Pravaron Technology & Agentic, focused on developing 
-                advanced AI solutions and intelligent agents.
+                Experienced in AI pipelines, web platforms, and mobile apps. Currently pursuing 
+                an internship at Pravaron Technology & Agentic, building advanced AI solutions and agents.
               </p>
               <p className="about-text p3">
-                As a freelance developer since Feb 2023, I've delivered scalable, high-performance solutions 
-                for diverse clients including e-commerce platforms, media applications, and interactive dashboards, 
-                maintaining a 100% on-time delivery rate.
+                Since Feb 2023, I have delivered e-commerce storefronts, media apps, and interactive dashboards 
+                for freelance clients while maintaining a 100% on-time delivery rate.
               </p>
+            </div>
+
+            <div className="skills-section">
+              <h3 className="skills-title">Skills & technologies</h3>
+              <div className="skills-grid">
+                {skills.map((skill, index) => (
+                  <div key={index} className="skill-item hoverable">
+                    <span>{skill}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
@@ -134,31 +183,15 @@ const About = () => {
                 muted
                 playsInline
                 preload="auto"
-                style={{ backgroundColor: '#f8f9fb' }}
                 aria-label="Character typing and coding animation"
                 className="about-coding-video"
+                onLoadedData={playLoopingVideo}
+                onCanPlay={playLoopingVideo}
               />
-              {/* Atmospheric Fog Effect Overlays (Heavy at Corners, Subtle at Center) */}
-              <div className="video-fog-left" />
-              <div className="video-fog-top-left" />
-              <div className="video-fog-bottom-left" />
-              <div className="video-fog-top" />
-              <div className="video-fog-bottom" />
             </div>
           </div>
         </div>
 
-        {/* Skills Section */}
-        <div className="skills-section">
-          <h3 className="skills-title">Skills & Technologies</h3>
-          <div className="skills-grid">
-            {skills.map((skill, index) => (
-              <div key={index} className="skill-item hoverable">
-                <span>{skill}</span>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   );

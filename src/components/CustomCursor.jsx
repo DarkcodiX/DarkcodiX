@@ -5,28 +5,33 @@ import './CustomCursor.css';
 const CustomCursor = () => {
   const cursorRef = useRef(null);
   const cursorDotRef = useRef(null);
-  const [isHovering, setIsHovering] = useState(false);
+  const isHoveringRef = useRef(false);
   const [ripples, setRipples] = useState([]);
 
   useEffect(() => {
+    const prefersNativeCursor =
+      window.matchMedia('(pointer: coarse)').matches ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+      navigator.maxTouchPoints > 0;
+
+    if (prefersNativeCursor) return;
+
     document.body.classList.add('custom-cursor');
 
     const cursor = cursorRef.current;
     const cursorDot = cursorDotRef.current;
+    if (!cursor || !cursorDot) return;
+
+    const cursorX = gsap.quickTo(cursor, 'x', { duration: 0.28, ease: 'power3.out' });
+    const cursorY = gsap.quickTo(cursor, 'y', { duration: 0.28, ease: 'power3.out' });
+    const dotX = gsap.quickTo(cursorDot, 'x', { duration: 0.08, ease: 'none' });
+    const dotY = gsap.quickTo(cursorDot, 'y', { duration: 0.08, ease: 'none' });
 
     const moveCursor = (e) => {
-      gsap.to(cursor, {
-        x: e.clientX,
-        y: e.clientY,
-        duration: 0.5,
-        ease: 'power2.out',
-      });
-
-      gsap.to(cursorDot, {
-        x: e.clientX,
-        y: e.clientY,
-        duration: 0.1,
-      });
+      cursorX(e.clientX);
+      cursorY(e.clientY);
+      dotX(e.clientX);
+      dotY(e.clientY);
     };
 
     const handleMouseDown = (e) => {
@@ -49,7 +54,7 @@ const CustomCursor = () => {
 
     const handleMouseUp = () => {
       gsap.to(cursor, {
-        scale: isHovering ? 1.5 : 1,
+        scale: isHoveringRef.current ? 1.5 : 1,
         duration: 0.2,
       });
     };
@@ -60,7 +65,7 @@ const CustomCursor = () => {
 
     // Handle hover states
     const handleMouseEnter = () => {
-      setIsHovering(true);
+      isHoveringRef.current = true;
       gsap.to(cursor, {
         scale: 1.5,
         backgroundColor: 'rgba(99, 102, 241, 0.3)',
@@ -70,7 +75,7 @@ const CustomCursor = () => {
     };
 
     const handleMouseLeave = () => {
-      setIsHovering(false);
+      isHoveringRef.current = false;
       gsap.to(cursor, {
         scale: 1,
         backgroundColor: 'rgba(255, 255, 255, 0.1)',
@@ -101,7 +106,7 @@ const CustomCursor = () => {
 
       document.body.classList.remove('custom-cursor');
     };
-  }, [isHovering]);
+  }, []);
 
   return (
     <>

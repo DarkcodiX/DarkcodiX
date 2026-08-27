@@ -6,7 +6,7 @@ import './SplashScreen.css';
 
 gsap.registerPlugin(SplitText);
 
-const SplashScreen = ({ onComplete }) => {
+const SplashScreen = ({ onRevealStart, onComplete }) => {
   const containerRef = useRef(null);
   const [progress, setProgress] = useState(0);
   const [isExiting, setIsExiting] = useState(false);
@@ -16,6 +16,7 @@ const SplashScreen = ({ onComplete }) => {
   const rendererRef = useRef(null);
   const cameraRef = useRef(null);
   const textCharsRef = useRef([]);
+  const revealStartedRef = useRef(false);
 
   // Sync text animation with progress + gooey effect
   useEffect(() => {
@@ -44,7 +45,7 @@ const SplashScreen = ({ onComplete }) => {
     // Set initial state - all blurred with gooey effect
     gsap.set(split.chars, {
       opacity: 0,
-      filter: 'blur(20px)',
+      filter: 'blur(10px)',
       scale: 0.7,
       y: 20
     });
@@ -76,7 +77,7 @@ const SplashScreen = ({ onComplete }) => {
           y: 0,
           duration: 0.8,
           ease: 'power3.out',
-          delay: index * 0.03 // Faster stagger
+          delay: index * 0.025 // Faster stagger
         });
       }
     });
@@ -86,13 +87,9 @@ const SplashScreen = ({ onComplete }) => {
     if (!containerRef.current) return;
     
     // Prevent double creation in React Strict Mode
-    if (cloudsCreatedRef.current) {
-      console.log('Clouds already created, skipping...');
-      return;
-    }
+    if (cloudsCreatedRef.current) return;
     
     cloudsCreatedRef.current = true;
-    console.log('Creating clouds - ONCE ONLY');
 
     // Scene setup - transparent with light fog
     const scene = new THREE.Scene();
@@ -110,50 +107,67 @@ const SplashScreen = ({ onComplete }) => {
     cameraRef.current = camera;
 
     const renderer = new THREE.WebGLRenderer({ 
-      antialias: true,
-      alpha: true // Transparent canvas
+      antialias: false,
+      alpha: true, // Transparent canvas
+      powerPreference: 'low-power'
     });
+    const maxPixelRatio = navigator.hardwareConcurrency <= 4 ? 1 : 1.15;
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, maxPixelRatio));
     rendererRef.current = renderer;
     containerRef.current.appendChild(renderer.domElement);
 
     // Create cloud texture using canvas
     const canvas = document.createElement('canvas');
-    canvas.width = 256;
-    canvas.height = 256;
+    canvas.width = 192;
+    canvas.height = 192;
     const ctx = canvas.getContext('2d');
 
-    const gradient = ctx.createRadialGradient(128, 128, 20, 128, 128, 128);
+    const bodyShade = ctx.createRadialGradient(92, 104, 12, 96, 96, 96);
+    bodyShade.addColorStop(0, 'rgba(222, 224, 231, 0.34)');
+    bodyShade.addColorStop(0.45, 'rgba(214, 217, 226, 0.28)');
+    bodyShade.addColorStop(0.78, 'rgba(202, 205, 214, 0.16)');
+    bodyShade.addColorStop(1, 'rgba(255, 255, 255, 0)');
+    ctx.fillStyle = bodyShade;
+    ctx.fillRect(0, 0, 192, 192);
+
+    const gradient = ctx.createRadialGradient(96, 88, 16, 96, 96, 96);
     gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
     gradient.addColorStop(0.2, 'rgba(255, 255, 255, 0.95)');
-    gradient.addColorStop(0.35, 'rgba(252, 252, 255, 0.8)');
-    gradient.addColorStop(0.5, 'rgba(250, 250, 254, 0.65)');
-    gradient.addColorStop(0.65, 'rgba(248, 248, 252, 0.5)');
-    gradient.addColorStop(0.8, 'rgba(245, 245, 250, 0.3)');
-    gradient.addColorStop(0.92, 'rgba(243, 243, 248, 0.12)');
+    gradient.addColorStop(0.35, 'rgba(252, 252, 255, 0.86)');
+    gradient.addColorStop(0.5, 'rgba(244, 245, 249, 0.72)');
+    gradient.addColorStop(0.65, 'rgba(232, 235, 242, 0.56)');
+    gradient.addColorStop(0.8, 'rgba(218, 222, 232, 0.34)');
+    gradient.addColorStop(0.92, 'rgba(205, 209, 220, 0.16)');
     gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
     
     ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, 256, 256);
+    ctx.fillRect(0, 0, 192, 192);
     
-    ctx.filter = 'blur(10px)';
+    ctx.filter = 'blur(8px)';
     ctx.globalAlpha = 0.6;
-    ctx.fillRect(0, 0, 256, 256);
+    ctx.fillRect(0, 0, 192, 192);
+    
+    ctx.filter = 'blur(4px)';
+    ctx.globalAlpha = 0.48;
+    const gradient2 = ctx.createRadialGradient(96, 88, 30, 96, 96, 82);
+    gradient2.addColorStop(0, 'rgba(255, 255, 255, 0.78)');
+    gradient2.addColorStop(0.45, 'rgba(252, 252, 255, 0.52)');
+    gradient2.addColorStop(0.72, 'rgba(220, 223, 232, 0.3)');
+    gradient2.addColorStop(1, 'rgba(255, 255, 255, 0)');
+    ctx.fillStyle = gradient2;
+    ctx.fillRect(0, 0, 192, 192);
 
     const cloudTexture = new THREE.CanvasTexture(canvas);
 
-    // Create cloud material - semi-transparent so landing shows!
-    const cloudMaterial = new THREE.MeshLambertMaterial({
+    // Sprite clouds preserve the same flow with far less GPU cost than hundreds of lit spheres.
+    const cloudMaterial = new THREE.SpriteMaterial({
       map: cloudTexture,
       transparent: true,
-      opacity: 0.85, // Semi-transparent
+      opacity: 0.94, // Semi-transparent
       depthWrite: false,
-      side: THREE.DoubleSide,
       blending: THREE.NormalBlending,
-      color: 0xf5f5f5, // Very light gray
-      emissive: 0xffffff,
-      emissiveIntensity: 0.05,
+      color: 0xffffff, // Keep /test brightness while texture carries the gray shade.
     });
 
     // Create large cloud structure (same as /test but bigger)
@@ -204,9 +218,9 @@ const SplashScreen = ({ onComplete }) => {
     // Create TOP ROW - 2 clouds overlapping
     const topLeft = new THREE.Group();
     cloudPositions.forEach(pos => {
-      const geometry = new THREE.SphereGeometry(pos.scale, 24, 24); // Better quality
-      const mesh = new THREE.Mesh(geometry, cloudMaterial);
+      const mesh = new THREE.Sprite(cloudMaterial);
       mesh.position.set(pos.x, pos.y, pos.z);
+      mesh.scale.setScalar(pos.scale * 2);
       topLeft.add(mesh);
     });
     topLeft.position.set(-3, 3.5, 0);
@@ -216,9 +230,9 @@ const SplashScreen = ({ onComplete }) => {
 
     const topRight = new THREE.Group();
     cloudPositions.forEach(pos => {
-      const geometry = new THREE.SphereGeometry(pos.scale, 32, 32);
-      const mesh = new THREE.Mesh(geometry, cloudMaterial);
+      const mesh = new THREE.Sprite(cloudMaterial);
       mesh.position.set(pos.x, pos.y, pos.z);
+      mesh.scale.setScalar(pos.scale * 2);
       topRight.add(mesh);
     });
     topRight.position.set(3, 3.5, 0);
@@ -229,9 +243,9 @@ const SplashScreen = ({ onComplete }) => {
     // Create MIDDLE ROW - 2 clouds overlapping (slightly forward)
     const middleLeft = new THREE.Group();
     cloudPositions.forEach(pos => {
-      const geometry = new THREE.SphereGeometry(pos.scale, 32, 32);
-      const mesh = new THREE.Mesh(geometry, cloudMaterial);
+      const mesh = new THREE.Sprite(cloudMaterial);
       mesh.position.set(pos.x, pos.y, pos.z);
+      mesh.scale.setScalar(pos.scale * 2);
       middleLeft.add(mesh);
     });
     middleLeft.position.set(-3, 0, 0.5);
@@ -241,9 +255,9 @@ const SplashScreen = ({ onComplete }) => {
 
     const middleRight = new THREE.Group();
     cloudPositions.forEach(pos => {
-      const geometry = new THREE.SphereGeometry(pos.scale, 32, 32);
-      const mesh = new THREE.Mesh(geometry, cloudMaterial);
+      const mesh = new THREE.Sprite(cloudMaterial);
       mesh.position.set(pos.x, pos.y, pos.z);
+      mesh.scale.setScalar(pos.scale * 2);
       middleRight.add(mesh);
     });
     middleRight.position.set(3, 0, 0.5);
@@ -254,9 +268,9 @@ const SplashScreen = ({ onComplete }) => {
     // Create BOTTOM ROW - 2 clouds overlapping
     const bottomLeft = new THREE.Group();
     cloudPositions.forEach(pos => {
-      const geometry = new THREE.SphereGeometry(pos.scale, 32, 32);
-      const mesh = new THREE.Mesh(geometry, cloudMaterial);
+      const mesh = new THREE.Sprite(cloudMaterial);
       mesh.position.set(pos.x, pos.y, pos.z);
+      mesh.scale.setScalar(pos.scale * 2);
       bottomLeft.add(mesh);
     });
     bottomLeft.position.set(-3, -3.5, 0);
@@ -266,9 +280,9 @@ const SplashScreen = ({ onComplete }) => {
 
     const bottomRight = new THREE.Group();
     cloudPositions.forEach(pos => {
-      const geometry = new THREE.SphereGeometry(pos.scale, 32, 32);
-      const mesh = new THREE.Mesh(geometry, cloudMaterial);
+      const mesh = new THREE.Sprite(cloudMaterial);
       mesh.position.set(pos.x, pos.y, pos.z);
+      mesh.scale.setScalar(pos.scale * 2);
       bottomRight.add(mesh);
     });
     bottomRight.position.set(3, -3.5, 0);
@@ -279,9 +293,9 @@ const SplashScreen = ({ onComplete }) => {
     // CENTER CLOUD - 7th cloud in perfect middle!
     const centerCloud = new THREE.Group();
     cloudPositions.forEach(pos => {
-      const geometry = new THREE.SphereGeometry(pos.scale, 32, 32);
-      const mesh = new THREE.Mesh(geometry, cloudMaterial);
+      const mesh = new THREE.Sprite(cloudMaterial);
       mesh.position.set(pos.x, pos.y, pos.z);
+      mesh.scale.setScalar(pos.scale * 2);
       centerCloud.add(mesh);
     });
     centerCloud.position.set(0, 0, 1); // Perfect center, slightly forward
@@ -289,33 +303,6 @@ const SplashScreen = ({ onComplete }) => {
     scene.add(centerCloud);
     cloudGroupsRef.current.push(centerCloud);
     
-    console.log('✅ Created exactly 7 clouds:', cloudGroupsRef.current.length);
-
-    // Lighting - brighter for more visible clouds with fog
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.8);
-    scene.add(ambientLight);
-
-    const sunLight = new THREE.DirectionalLight(0xffffff, 1.0);
-    sunLight.position.set(8, 10, 6);
-    scene.add(sunLight);
-
-    const fillLight = new THREE.DirectionalLight(0xffffff, 0.8);
-    fillLight.position.set(-6, -4, -5);
-    scene.add(fillLight);
-
-    const topLight = new THREE.DirectionalLight(0xffffff, 0.7);
-    topLight.position.set(0, 15, 0);
-    scene.add(topLight);
-
-    // Add atmospheric lights for fog effect
-    const fogLight1 = new THREE.PointLight(0xaaaaaa, 1.5, 20);
-    fogLight1.position.set(-5, 0, 3);
-    scene.add(fogLight1);
-
-    const fogLight2 = new THREE.PointLight(0xaaaaaa, 1.5, 20);
-    fogLight2.position.set(5, 0, 3);
-    scene.add(fogLight2);
-
     // Animation with exit handling
     let animationFrameId;
     const animate = () => {
@@ -329,17 +316,21 @@ const SplashScreen = ({ onComplete }) => {
 
     animate();
 
-    // Smooth loading progress - single RAF loop for smoothness
-    let progressValue = 0;
+    // Smooth loading progress - update React only when the visible number changes.
     let startTime = Date.now();
-    const duration = 5000; // 5 seconds
+    const duration = 3500;
     let rafId;
+    let lastProgress = -1;
 
     const updateProgress = () => {
       const elapsed = Date.now() - startTime;
       const newProgress = Math.min((elapsed / duration) * 100, 100);
+      const nextProgress = Math.floor(newProgress);
       
-      setProgress(Math.floor(newProgress));
+      if (nextProgress !== lastProgress) {
+        lastProgress = nextProgress;
+        setProgress(nextProgress);
+      }
       
       if (newProgress < 100) {
         rafId = requestAnimationFrame(updateProgress);
@@ -353,21 +344,16 @@ const SplashScreen = ({ onComplete }) => {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, maxPixelRatio));
     };
 
     window.addEventListener('resize', handleResize);
 
     // Cleanup - only when component unmounts
     return () => {
-      console.log('Cleaning up THREE.js scene');
       window.removeEventListener('resize', handleResize);
       if (rafId) cancelAnimationFrame(rafId);
       cancelAnimationFrame(animationFrameId);
-      cloudGroupsRef.current.forEach(cloud => {
-        cloud.children.forEach(mesh => {
-          mesh.geometry.dispose();
-        });
-      });
       cloudMaterial.dispose();
       cloudTexture.dispose();
       renderer.dispose();
@@ -382,24 +368,10 @@ const SplashScreen = ({ onComplete }) => {
   useEffect(() => {
     if (progress >= 100 && cloudGroupsRef.current.length >= 7 && !isExiting) {
       setIsExiting(true);
-      console.log('🚀 EXIT ANIMATION STARTING!');
-      console.log('Total clouds available:', cloudGroupsRef.current.length);
-      
       // Use all 7 clouds
       const clouds = cloudGroupsRef.current;
-      console.log('Animating clouds:', clouds.length);
-      const targetPos = [
-        { x: -15, y: 10, z: 2 },    // top left - VISIBLE range
-        { x: 15, y: 10, z: 2 },     // top right
-        { x: -18, y: 0, z: 1 },     // middle left
-        { x: 18, y: 0, z: 1 },      // middle right
-        { x: -15, y: -10, z: 2 },   // bottom left
-        { x: 15, y: -10, z: 2 }     // bottom right
-      ];
       
       setTimeout(() => {
-        console.log('🎬 Starting exit animation...');
-        
         // Text + Loader fade
         gsap.to(['.splash-text', '.splash-loader-container'], {
           opacity: 0,
@@ -408,17 +380,19 @@ const SplashScreen = ({ onComplete }) => {
         
         // ALL 6 CLOUDS + ZOOM - TOGETHER!
         setTimeout(() => {
-          console.log('💨 Moving ALL 6 clouds + ZOOM together!');
-          
+          gsap.delayedCall(2.1, () => {
+            if (!revealStartedRef.current) {
+              revealStartedRef.current = true;
+              onRevealStart?.();
+            }
+          });
+
           // TOP LEFT
           gsap.to(clouds[0].position, {
             x: -20,
             y: 12,
             duration: 3.0,
-            ease: 'power2.inOut',
-            onUpdate: () => {
-              clouds[0].updateMatrixWorld(true);
-            }
+            ease: 'power2.inOut'
           });
           
           // TOP RIGHT
@@ -426,30 +400,21 @@ const SplashScreen = ({ onComplete }) => {
             x: 20,
             y: 12,
             duration: 3.0,
-            ease: 'power2.inOut',
-            onUpdate: () => {
-              clouds[1].updateMatrixWorld(true);
-            }
+            ease: 'power2.inOut'
           });
           
           // MIDDLE LEFT
           gsap.to(clouds[2].position, {
             x: -25,
             duration: 3.0,
-            ease: 'power2.inOut',
-            onUpdate: () => {
-              clouds[2].updateMatrixWorld(true);
-            }
+            ease: 'power2.inOut'
           });
           
           // MIDDLE RIGHT
           gsap.to(clouds[3].position, {
             x: 25,
             duration: 3.0,
-            ease: 'power2.inOut',
-            onUpdate: () => {
-              clouds[3].updateMatrixWorld(true);
-            }
+            ease: 'power2.inOut'
           });
           
           // BOTTOM LEFT
@@ -457,10 +422,7 @@ const SplashScreen = ({ onComplete }) => {
             x: -20,
             y: -12,
             duration: 3.0,
-            ease: 'power2.inOut',
-            onUpdate: () => {
-              clouds[4].updateMatrixWorld(true);
-            }
+            ease: 'power2.inOut'
           });
           
           // BOTTOM RIGHT
@@ -468,20 +430,14 @@ const SplashScreen = ({ onComplete }) => {
             x: 20,
             y: -12,
             duration: 3.0,
-            ease: 'power2.inOut',
-            onUpdate: () => {
-              clouds[5].updateMatrixWorld(true);
-            }
+            ease: 'power2.inOut'
           });
           
           // CENTER CLOUD - 7th cloud moves left!
           gsap.to(clouds[6].position, {
             x: -30,
             duration: 3.0,
-            ease: 'power2.inOut',
-            onUpdate: () => {
-              clouds[6].updateMatrixWorld(true);
-            }
+            ease: 'power2.inOut'
           });
           
           // CAMERA ZOOM - SAME TIME!
@@ -489,18 +445,18 @@ const SplashScreen = ({ onComplete }) => {
             z: -10,
             duration: 3.0,
             ease: 'power2.inOut',
-            onUpdate: () => {
-              cameraRef.current.updateMatrixWorld(true);
-            },
             onComplete: () => {
-              console.log('✅ ALL clouds moved + ZOOM done!');
-              
               // Fade out splash screen overlay smoothly, then signal landing page reveal!
               gsap.to('.splash-screen', {
                 opacity: 0,
                 duration: 0.3,
                 ease: 'power2.out',
                 onComplete: () => {
+                  if (!revealStartedRef.current) {
+                    revealStartedRef.current = true;
+                    onRevealStart?.();
+                  }
+
                   if (onComplete) {
                     onComplete(); // Signal App.jsx to start content reveal
                   }
@@ -511,7 +467,7 @@ const SplashScreen = ({ onComplete }) => {
         }, 600);
       }, 1000);
     }
-  }, [progress, onComplete]);
+  }, [progress, isExiting, onRevealStart, onComplete]);
 
   return (
     <div className="splash-screen">

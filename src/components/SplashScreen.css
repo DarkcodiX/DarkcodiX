@@ -52,14 +52,14 @@
 }
 
 .gooey-filter {
-  filter: url(#gooey-text-filter) blur(0.4px);
-  will-change: filter;
+  filter: url(#gooey-text-filter);
+  will-change: transform, opacity;
 }
 
 .splash-char {
   display: inline-block;
   transform-origin: center;
-  will-change: transform, opacity, filter;
+  will-change: transform, opacity;
 }
 
 .gooey-text-reveal-line {
@@ -101,7 +101,6 @@
   overflow: hidden;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05),
               inset 0 1px 3px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(5px);
 }
 
 .loader-line-fill {
@@ -116,10 +115,11 @@
     rgba(180, 180, 180, 0.8) 75%,
     rgba(150, 150, 150, 0.6) 100%);
   border-radius: 20px;
-  transition: width 0.3s ease-out;
-  box-shadow: 0 0 15px rgba(180, 180, 180, 0.6),
-              0 0 25px rgba(200, 200, 200, 0.4);
+  transition: width 0.18s linear;
+  box-shadow: 0 0 10px rgba(180, 180, 180, 0.45),
+              0 0 16px rgba(200, 200, 200, 0.28);
   animation: cloudyShimmer 2s ease-in-out infinite;
+  transform-origin: left center;
 }
 
 .loader-cloud-overlay {
@@ -145,10 +145,12 @@
 
 @keyframes cloudyShimmer {
   0%, 100% {
-    filter: brightness(1) blur(0px);
+    opacity: 0.92;
+    transform: translateZ(0) scaleY(1);
   }
   50% {
-    filter: brightness(1.1) blur(1px);
+    opacity: 1;
+    transform: translateZ(0) scaleY(1.08);
   }
 }
 

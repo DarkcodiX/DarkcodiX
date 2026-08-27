@@ -8,6 +8,13 @@ const WebGLBackground = () => {
   useEffect(() => {
     if (!canvasRef.current) return;
 
+    const lowPowerMode =
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+      navigator.hardwareConcurrency <= 4 ||
+      navigator.deviceMemory <= 4;
+
+    if (lowPowerMode) return;
+
     // Scene setup
     const scene = new THREE.Scene();
     const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
@@ -15,10 +22,11 @@ const WebGLBackground = () => {
     const renderer = new THREE.WebGLRenderer({
       canvas: canvasRef.current,
       alpha: true,
-      antialias: true,
+      antialias: false,
+      powerPreference: 'low-power',
     });
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.25));
 
     // Light grayscale gradient with small random ripples
     const material = new THREE.ShaderMaterial({
@@ -210,10 +218,12 @@ const WebGLBackground = () => {
     window.addEventListener('mousemove', handleMouseMove);
 
     // Animation loop
-    const clock = new THREE.Clock();
+    const startTime = performance.now();
+    let frameId;
+    let isVisible = true;
 
     const animate = () => {
-      const elapsedTime = clock.getElapsedTime();
+      const elapsedTime = (performance.now() - startTime) / 1000;
       
       // Update uniforms
       material.uniforms.u_time.value = elapsedTime;
@@ -221,10 +231,37 @@ const WebGLBackground = () => {
       material.uniforms.u_mouse.value.y += (mouseY - material.uniforms.u_mouse.value.y) * 0.05;
       
       renderer.render(scene, camera);
-      requestAnimationFrame(animate);
+      frameId = requestAnimationFrame(animate);
     };
 
-    animate();
+    const startLoop = () => {
+      if (!frameId) {
+        frameId = requestAnimationFrame(animate);
+      }
+    };
+
+    const stopLoop = () => {
+      if (frameId) {
+        cancelAnimationFrame(frameId);
+        frameId = null;
+      }
+    };
+
+    startLoop();
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible) {
+          startLoop();
+        } else {
+          stopLoop();
+        }
+      },
+      { threshold: 0.01 }
+    );
+    const visibilityTarget = canvasRef.current.closest('.character-reveal-section') || canvasRef.current;
+    observer.observe(visibilityTarget);
 
     // Handle resize
     const handleResize = () => {
@@ -232,7 +269,7 @@ const WebGLBackground = () => {
       const height = window.innerHeight;
       
       renderer.setSize(width, height);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.25));
       material.uniforms.u_resolution.value.set(width, height);
     };
 
@@ -240,6 +277,8 @@ const WebGLBackground = () => {
 
     // Cleanup
     return () => {
+      observer.disconnect();
+      cancelAnimationFrame(frameId);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('resize', handleResize);
       geometry.dispose();
