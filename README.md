@@ -1,11 +1,10 @@
 <div align="center">
 
-  <h1>
-    <img src="https://raw.githubusercontent.com/DarkcodiX/DarkcodiX/main/assets/logo.png" width="44" height="44" alt="DarkcodiX Logo" style="vertical-align: middle; margin-right: 10px;" />
-    DarkcodiX
+  <h1 align="center">
+    <img src="https://raw.githubusercontent.com/DarkcodiX/DarkcodiX/main/assets/logo.png" width="32" height="32" align="middle" alt="DarkcodiX Logo" />&nbsp;DarkcodiX
   </h1>
   
-  <p><strong>AI/ML Agent Engineer &nbsp;·&nbsp; Full-Stack Systems Architect &nbsp;·&nbsp; Creative Technologist</strong></p>
+  <p align="center"><strong>AI/ML Agent Engineer &nbsp;·&nbsp; Full-Stack Systems Architect &nbsp;·&nbsp; Creative Technologist</strong></p>
 
   <img src="https://readme-typing-svg.herokuapp.com?font=Orbitron&size=28&duration=3000&pause=1000&color=6366F1&center=true&vCenter=true&width=850&height=65&lines=Hello+World!+I'm+Jayesh+Butiya+(DarkcodiX);AI%2FML+Agent+Engineer+%7C+Full-Stack+Architect;1st+Prize+Winner+%40+Bhagubhai+Hackathon+2026;Building+Autonomous+AI+%26+Next-Gen+Spatial+Web" alt="Typing SVG" />
 
