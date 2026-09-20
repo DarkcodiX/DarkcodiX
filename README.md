@@ -208,8 +208,8 @@ interface DeveloperProfile {
 ## <img src="https://img.icons8.com/material-rounded/24/6366f1/bar-chart.png" width="22" height="22" style="vertical-align: middle;" /> GitHub Telemetry &amp; Metrics
 
 <div align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=DarkcodiX&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=6366F1&icon_color=00D9FF" alt="Darkcodix GitHub Stats" height="175"/>
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=DarkcodiX&theme=tokyonight&hide_border=true&background=0D1117&ring=6366F1&fire=00D9FF" alt="Darkcodix Streak Stats" height="175"/>
+  <img src="https://github-readme-stats-eight-theta.vercel.app/api?username=DarkcodiX&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=6366F1&icon_color=00D9FF" alt="Darkcodix GitHub Stats" height="175"/>
+  <img src="https://streak-stats.demolab.com/?user=DarkcodiX&theme=tokyonight&hide_border=true&background=0D1117&ring=6366F1&fire=00D9FF" alt="Darkcodix Streak Stats" height="175"/>
 </div>
 
 ---
