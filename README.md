@@ -1,6 +1,6 @@
 <div align="center">
 
-  <img src="https://raw.githubusercontent.com/DarkcodiX/Portfolio/main/src/assets/logo.png" width="130" height="130" alt="DarkcodiX Brand Mark" />
+  <img src="https://raw.githubusercontent.com/DarkcodiX/DarkcodiX/main/assets/logo.png" width="130" height="130" alt="DarkcodiX Brand Mark" />
 
   # DarkcodiX
   
