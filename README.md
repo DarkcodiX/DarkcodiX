@@ -1,46 +1,55 @@
-# <div align="center">DarkcodiX — Digital Engineering &amp; AI Systems</div>
-
-<div align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Orbitron&size=30&duration=3000&pause=1000&color=6366F1&center=true&vCenter=true&width=850&height=70&lines=Hello+World!+I'm+Jayesh+Butiya+(DarkcodiX);AI%2FML+Agent+Engineer+%7C+Full-Stack+Architect;1st+Prize+Winner+%40+Bhagubhai+Hackathon+2026;Building+Autonomous+AI+%26+Next-Gen+3D+Web+Experiences" alt="Typing SVG" />
-</div>
-
-<div align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=120&section=header&text=&fontSize=0" width="100%"/>
-</div>
-
 <div align="center">
 
-  [![Portfolio](https://img.shields.io/badge/Live_Portfolio-darkcodix.dedyn.io-6366F1?style=for-the-badge&logo=googlechrome&logoColor=white)](https://darkcodix.dedyn.io/)
-  [![LinkedIn](https://img.shields.io/badge/LinkedIn-Jayesh_Butiya-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/dark-codix-b4a697375/)
-  [![GitHub](https://img.shields.io/badge/GitHub-DarkcodiX-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/DarkcodiX)
-  [![Email](https://img.shields.io/badge/Email-jayeshbutiya2008@gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:jayeshbutiya2008@gmail.com)
-  [![Instagram](https://img.shields.io/badge/Instagram-@itz__darkcodix-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://instagram.com/itz_darkcodix)
+  <img src="https://raw.githubusercontent.com/DarkcodiX/Portfolio/main/src/assets/logo.png" width="130" height="130" alt="DarkcodiX Brand Mark" />
+
+  # DarkcodiX
+  
+  <p><strong>AI/ML Agent Engineer &nbsp;·&nbsp; Full-Stack Systems Architect &nbsp;·&nbsp; Creative Technologist</strong></p>
+
+  <img src="https://readme-typing-svg.herokuapp.com?font=Orbitron&size=28&duration=3000&pause=1000&color=6366F1&center=true&vCenter=true&width=850&height=65&lines=Hello+World!+I'm+Jayesh+Butiya+(DarkcodiX);AI%2FML+Agent+Engineer+%7C+Full-Stack+Architect;1st+Prize+Winner+%40+Bhagubhai+Hackathon+2026;Building+Autonomous+AI+%26+Next-Gen+Spatial+Web" alt="Typing SVG" />
+
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=110&section=header&text=&fontSize=0" width="100%"/>
+
+  <p>
+    <a href="https://darkcodix.dedyn.io/" target="_blank">
+      <img src="https://img.shields.io/badge/Live_Portfolio-darkcodix.dedyn.io-6366F1?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Live Portfolio" />
+    </a>
+    <a href="https://www.linkedin.com/in/dark-codix-b4a697375/" target="_blank">
+      <img src="https://img.shields.io/badge/LinkedIn-Jayesh_Butiya-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
+    </a>
+    <a href="https://github.com/DarkcodiX" target="_blank">
+      <img src="https://img.shields.io/badge/GitHub-DarkcodiX-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
+    </a>
+    <a href="mailto:jayeshbutiya2008@gmail.com">
+      <img src="https://img.shields.io/badge/Email-jayeshbutiya2008@gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" />
+    </a>
+    <a href="https://instagram.com/itz_darkcodix" target="_blank">
+      <img src="https://img.shields.io/badge/Instagram-@itz__darkcodix-E4405F?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram" />
+    </a>
+  </p>
 
 </div>
 
 ---
 
-## <img src="https://img.icons8.com/material-rounded/24/6366f1/user-male-circle.png" width="22" height="22" style="vertical-align: middle;" /> About Me
+## <img src="https://img.icons8.com/material-rounded/24/6366f1/user-male-circle.png" width="22" height="22" style="vertical-align: middle;" /> Developer Profile
 
-<img align="right" alt="Darkcodix Coding Animation" width="380" src="https://raw.githubusercontent.com/devSouvik/devSouvik/master/gif3.gif">
+<img align="right" alt="Darkcodix Coding Workspace" width="370" src="https://raw.githubusercontent.com/devSouvik/devSouvik/master/gif3.gif">
 
 ```typescript
 interface DeveloperProfile {
   name: "Jayesh Butiya (DarkcodiX)";
-  status: "Building Autonomous Agentic AI Pipelines";
-  roles: [
-    "AI/ML Agent Engineer",
-    "Full-Stack Systems Architect",
-    "Creative 3D WebGL Developer"
-  ];
-  coreStack: [
-    "Python", "TypeScript", "React 19", "Three.js",
-    "FastAPI", "Node.js", "Redis", "LangChain"
+  status: "Architecting Autonomous Agentic Loops & Deterministic Workflows";
+  specializations: [
+    "Autonomous Multi-Agent Orchestration",
+    "High-Performance Spatial 3D WebGL Experiences",
+    "Production Microservices & Vector Database Pipelines",
+    "Full-Stack Web Systems & High-Concurrency APIs"
   ];
   credentials: [
     "1st Prize Winner — SVKM Bhagubhai Hackathon 2026",
     "AI/ML Agent Developer Intern @ Pravaron Technologies",
-    "18+ Production Full-Stack Deployments (100% On-Time)"
+    "18+ Production Full-Stack Deployments (100% On-Time Record)"
   ];
   philosophy: "Code is imagination engineered into deterministic, high-performance reality.";
 }
@@ -52,7 +61,7 @@ interface DeveloperProfile {
 
 ---
 
-## <img src="https://img.icons8.com/material-rounded/24/6366f1/briefcase.png" width="22" height="22" style="vertical-align: middle;" /> Career &amp; Industry Experience
+## <img src="https://img.icons8.com/material-rounded/24/6366f1/briefcase.png" width="22" height="22" style="vertical-align: middle;" /> Industry Experience &amp; Milestones
 
 <div align="center">
   <table width="100%">
@@ -61,8 +70,8 @@ interface DeveloperProfile {
         <h3>Pravaron Technologies Pvt. Ltd.</h3>
         <p><strong>Role:</strong> AI/ML Agent Developer Intern &nbsp;|&nbsp; <strong>Period:</strong> 2026 – Present</p>
         <p>• Architecting autonomous agentic AI loops, deterministic tool-calling workflows, and real-time retrieval systems.</p>
-        <p>• High-concurrency API orchestrations with structured outputs, vector embeddings, FastAPI, and Redis.</p>
-        <p>• Automated zero-shot reasoning evaluation pipelines and multi-agent coordination frameworks.</p>
+        <p>• Engineering high-concurrency API orchestrations with structured outputs, vector embeddings, FastAPI, and Redis.</p>
+        <p>• Constructing automated zero-shot reasoning evaluation pipelines and multi-agent coordination frameworks.</p>
       </td>
       <td width="50%" valign="top">
         <h3>Coding Chaska</h3>
@@ -81,7 +90,7 @@ interface DeveloperProfile {
         <p>• Built zero-trust authentication, idempotent transaction logs, and real-time telemetry.</p>
       </td>
       <td width="50%" valign="top">
-        <h3>Freelance &amp; Systems Engineering</h3>
+        <h3>Independent Systems Engineering</h3>
         <p><strong>Role:</strong> Full-Stack Solutions Architect &nbsp;|&nbsp; <strong>Period:</strong> 2024 – Present</p>
         <p>• Shipped 18+ web applications, full-stack systems, and client solutions with a 100% on-time record.</p>
         <p>• Engineered high-performance frontend interfaces with GSAP animations, 3D WebGL, and Next.js.</p>
@@ -205,36 +214,27 @@ interface DeveloperProfile {
 
 ---
 
-## <img src="https://img.icons8.com/material-rounded/24/6366f1/bar-chart.png" width="22" height="22" style="vertical-align: middle;" /> GitHub Telemetry &amp; Metrics
-
 <div align="center">
-  <img src="https://github-readme-stats-eight-theta.vercel.app/api?username=DarkcodiX&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=6366F1&icon_color=00D9FF" alt="Darkcodix GitHub Stats" height="175"/>
-  <img src="https://streak-stats.demolab.com/?user=DarkcodiX&theme=tokyonight&hide_border=true&background=0D1117&ring=6366F1&fire=00D9FF" alt="Darkcodix Streak Stats" height="175"/>
-</div>
 
----
+  ## <img src="https://img.icons8.com/material-rounded/24/6366f1/globe.png" width="22" height="22" style="vertical-align: middle;" /> Connect &amp; Collaborate
 
-## <img src="https://img.icons8.com/material-rounded/24/6366f1/globe.png" width="22" height="22" style="vertical-align: middle;" /> Connect &amp; Collaborate
+  <p>
+    <a href="https://darkcodix.dedyn.io/" target="_blank">
+      <img src="https://img.shields.io/badge/Live_Portfolio-6366F1?style=for-the-badge&logoColor=white" alt="Portfolio"/>
+    </a>
+    <a href="https://www.linkedin.com/in/dark-codix-b4a697375/" target="_blank">
+      <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"/>
+    </a>
+    <a href="mailto:jayeshbutiya2008@gmail.com">
+      <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email"/>
+    </a>
+    <a href="https://instagram.com/itz_darkcodix" target="_blank">
+      <img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram"/>
+    </a>
+  </p>
 
-<div align="center">
-  <a href="https://darkcodix.dedyn.io/" target="_blank">
-    <img src="https://img.shields.io/badge/Live_Portfolio-6366F1?style=for-the-badge&logoColor=white" alt="Portfolio"/>
-  </a>
-  <a href="https://www.linkedin.com/in/dark-codix-b4a697375/" target="_blank">
-    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"/>
-  </a>
-  <a href="mailto:jayeshbutiya2008@gmail.com">
-    <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email"/>
-  </a>
-  <a href="https://instagram.com/itz_darkcodix" target="_blank">
-    <img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram"/>
-  </a>
-</div>
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=110&section=footer&text=&fontSize=0" width="100%"/>
 
----
+  <h3>Thanks for visiting. Let's engineer the future together.</h3>
 
-<div align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=120&section=footer&text=&fontSize=0" width="100%"/>
-  <br>
-  <h3>Thanks for visiting! Let's engineer the future together</h3>
 </div>
