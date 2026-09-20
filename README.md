@@ -1,7 +1,7 @@
 <div align="center">
 
   <h1 align="center">
-    <img src="https://raw.githubusercontent.com/DarkcodiX/DarkcodiX/main/assets/logo.png" width="32" height="32" align="middle" alt="DarkcodiX Logo" />&nbsp;DarkcodiX
+    <img src="https://raw.githubusercontent.com/DarkcodiX/DarkcodiX/main/assets/logo.png" width="26" height="26" alt="DarkcodiX Logo" />&nbsp;DarkcodiX
   </h1>
   
   <p align="center"><strong>AI/ML Agent Engineer &nbsp;·&nbsp; Full-Stack Systems Architect &nbsp;·&nbsp; Creative Technologist</strong></p>
