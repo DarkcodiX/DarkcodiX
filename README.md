@@ -1,8 +1,9 @@
 <div align="center">
 
-  <img src="https://raw.githubusercontent.com/DarkcodiX/DarkcodiX/main/assets/logo.png" width="130" height="130" alt="DarkcodiX Brand Mark" />
-
-  # DarkcodiX
+  <h1>
+    <img src="https://raw.githubusercontent.com/DarkcodiX/DarkcodiX/main/assets/logo.png" width="44" height="44" alt="DarkcodiX Logo" style="vertical-align: middle; margin-right: 10px;" />
+    DarkcodiX
+  </h1>
   
   <p><strong>AI/ML Agent Engineer &nbsp;·&nbsp; Full-Stack Systems Architect &nbsp;·&nbsp; Creative Technologist</strong></p>
 
