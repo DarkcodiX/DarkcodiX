@@ -1,7 +1,7 @@
-# <div align="center">🌌 Welcome to DarkcodiX's Digital Universe 🌌</div>
+# <div align="center">DarkcodiX — Digital Engineering &amp; AI Systems</div>
 
 <div align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Orbitron&size=30&duration=3000&pause=1000&color=6366F1&center=true&vCenter=true&width=850&height=70&lines=Hello+World!+I'm+Jayesh+Butiya+(DarkcodiX)+%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BB;AI%2FML+Agent+Engineer+%7C+Full-Stack+Architect;1st+Prize+Winner+%40+Bhagubhai+Hackathon+2026;Building+Autonomous+AI+%26+Next-Gen+3D+Web+Experiences" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.herokuapp.com?font=Orbitron&size=30&duration=3000&pause=1000&color=6366F1&center=true&vCenter=true&width=850&height=70&lines=Hello+World!+I'm+Jayesh+Butiya+(DarkcodiX);AI%2FML+Agent+Engineer+%7C+Full-Stack+Architect;1st+Prize+Winner+%40+Bhagubhai+Hackathon+2026;Building+Autonomous+AI+%26+Next-Gen+3D+Web+Experiences" alt="Typing SVG" />
 </div>
 
 <div align="center">
@@ -10,7 +10,7 @@
 
 <div align="center">
 
-  [![Portfolio](https://img.shields.io/badge/🌐_Live_Portfolio-darkcodix.dedyn.io-6366F1?style=for-the-badge&logo=googlechrome&logoColor=white)](https://darkcodix.dedyn.io/)
+  [![Portfolio](https://img.shields.io/badge/Live_Portfolio-darkcodix.dedyn.io-6366F1?style=for-the-badge&logo=googlechrome&logoColor=white)](https://darkcodix.dedyn.io/)
   [![LinkedIn](https://img.shields.io/badge/LinkedIn-Jayesh_Butiya-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/dark-codix-b4a697375/)
   [![GitHub](https://img.shields.io/badge/GitHub-DarkcodiX-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/DarkcodiX)
   [![Email](https://img.shields.io/badge/Email-jayeshbutiya2008@gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:jayeshbutiya2008@gmail.com)
@@ -20,7 +20,7 @@
 
 ---
 
-## 🧬 About Me
+## <img src="https://img.icons8.com/material-rounded/24/6366f1/user-male-circle.png" width="22" height="22" style="vertical-align: middle;" /> About Me
 
 <img align="right" alt="Darkcodix Coding Animation" width="380" src="https://raw.githubusercontent.com/devSouvik/devSouvik/master/gif3.gif">
 
@@ -42,7 +42,7 @@ interface DeveloperProfile {
     "AI/ML Agent Developer Intern @ Pravaron Technologies",
     "18+ Production Full-Stack Deployments (100% On-Time)"
   ];
-  philosophy: "Code isn't just instructions — it's imagination engineered into high-performance reality.";
+  philosophy: "Code is imagination engineered into deterministic, high-performance reality.";
 }
 ```
 
@@ -52,40 +52,40 @@ interface DeveloperProfile {
 
 ---
 
-## 💼 Career & Work Experience
+## <img src="https://img.icons8.com/material-rounded/24/6366f1/briefcase.png" width="22" height="22" style="vertical-align: middle;" /> Career &amp; Industry Experience
 
 <div align="center">
-  <table>
+  <table width="100%">
     <tr>
       <td width="50%" valign="top">
-        <h3>🤖 Pravaron Technologies Pvt. Ltd.</h3>
+        <h3>Pravaron Technologies Pvt. Ltd.</h3>
         <p><strong>Role:</strong> AI/ML Agent Developer Intern &nbsp;|&nbsp; <strong>Period:</strong> 2026 – Present</p>
-        <p>🔹 Architecting autonomous agentic AI loops, deterministic tool-calling workflows, and real-time retrieval systems.</p>
-        <p>🔹 High-concurrency API orchestrations with structured outputs, vector embeddings, FastAPI, and Redis.</p>
-        <p>🔹 Automated zero-shot reasoning evaluation pipelines and multi-agent coordination frameworks.</p>
+        <p>• Architecting autonomous agentic AI loops, deterministic tool-calling workflows, and real-time retrieval systems.</p>
+        <p>• High-concurrency API orchestrations with structured outputs, vector embeddings, FastAPI, and Redis.</p>
+        <p>• Automated zero-shot reasoning evaluation pipelines and multi-agent coordination frameworks.</p>
       </td>
       <td width="50%" valign="top">
-        <h3>🧠 Coding Chaska</h3>
+        <h3>Coding Chaska</h3>
         <p><strong>Role:</strong> AI/ML Intern &nbsp;|&nbsp; <strong>Period:</strong> 2025</p>
-        <p>🔹 Trained predictive machine learning models for classification, feature engineering, and inference.</p>
-        <p>🔹 Built automated data preprocessing and feature scaling pipelines with scikit-learn & Pandas.</p>
-        <p>🔹 Packaged and deployed production REST APIs with low-latency endpoints.</p>
+        <p>• Trained predictive machine learning models for classification, feature engineering, and inference.</p>
+        <p>• Built automated data preprocessing and feature scaling pipelines with scikit-learn &amp; Pandas.</p>
+        <p>• Packaged and deployed production REST APIs with low-latency endpoints.</p>
       </td>
     </tr>
     <tr>
       <td width="50%" valign="top">
-        <h3>🏆 SVKM's Shri Bhagubhai Mafatlal Polytechnic Hackathon</h3>
+        <h3>SVKM's Shri Bhagubhai Mafatlal Polytechnic Hackathon</h3>
         <p><strong>Award:</strong> 1st Prize Winner (Fintech Domain) &nbsp;|&nbsp; <strong>Year:</strong> 2026</p>
-        <p>🔹 Won 1st place in a national 24-hour hackathon competing against 50+ engineering teams.</p>
-        <p>🔹 Engineered a decentralized financial settlement platform with verified sub-second execution.</p>
-        <p>🔹 Built zero-trust authentication, idempotent transaction logs, and real-time telemetry.</p>
+        <p>• Won 1st place in a national 24-hour hackathon competing against 50+ engineering teams.</p>
+        <p>• Engineered a decentralized financial settlement platform with verified sub-second execution.</p>
+        <p>• Built zero-trust authentication, idempotent transaction logs, and real-time telemetry.</p>
       </td>
       <td width="50%" valign="top">
-        <h3>⚡ Freelance & Systems Engineering</h3>
+        <h3>Freelance &amp; Systems Engineering</h3>
         <p><strong>Role:</strong> Full-Stack Solutions Architect &nbsp;|&nbsp; <strong>Period:</strong> 2024 – Present</p>
-        <p>🔹 Shipped 18+ web applications, full-stack systems, and client solutions with a 100% on-time record.</p>
-        <p>🔹 Engineered high-performance frontend interfaces with GSAP animations, 3D WebGL, and Next.js.</p>
-        <p>🔹 End-to-end cloud deployments, authentication pipelines, and database migrations (5.0 ★ rating).</p>
+        <p>• Shipped 18+ web applications, full-stack systems, and client solutions with a 100% on-time record.</p>
+        <p>• Engineered high-performance frontend interfaces with GSAP animations, 3D WebGL, and Next.js.</p>
+        <p>• End-to-end cloud deployments, authentication pipelines, and database migrations (5.0 / 5.0 rating).</p>
       </td>
     </tr>
   </table>
@@ -93,56 +93,59 @@ interface DeveloperProfile {
 
 ---
 
-## 🚀 Featured Flagship Works
+## <img src="https://img.icons8.com/material-rounded/24/6366f1/rocket.png" width="22" height="22" style="vertical-align: middle;" /> Featured Flagship Works
 
 <div align="center">
-  <table>
+  <table width="100%">
     <tr>
-      <td width="50%" valign="top">
-        <h3 align="center">💻 <a href="https://zarainfotech.in/" target="_blank">Zara Infotech</a></h3>
+      <td width="33.33%" valign="top">
+        <h3 align="center"><a href="https://zarainfotech.in/" target="_blank">Zara Infotech</a></h3>
         <div align="center">
-          <p><strong>Verified Second-Hand Laptop & Diagnostics Marketplace</strong></p>
-          <p>🔹 Automated battery & hardware diagnostic scoring engine</p>
-          <p>🔹 Dynamic component matching algorithm & instant escrow payments</p>
-          <p>🔹 <strong>Stack:</strong> React, Node.js, Express, MongoDB, Redis, Tailwind CSS</p>
+          <p><strong>Refurbished IT Hardware Marketplace</strong></p>
+          <p>Automated hardware diagnostic scoring engine, instant escrow settlements, and dynamic matching.</p>
+          <p><strong>Stack:</strong> React, Express, Node.js, MongoDB, Redis</p>
         </div>
       </td>
-      <td width="50%" valign="top">
-        <h3 align="center">💎 Glame Core & Ratnashil</h3>
+      <td width="33.33%" valign="top">
+        <h3 align="center">Glame Core &amp; Ratnashil</h3>
         <div align="center">
-          <p><strong>High-Precision Luxury Jewelry E-Commerce Engine</strong></p>
-          <p>🔹 Real-time 3D ring visualizer & bespoke gemstone configurators</p>
-          <p>🔹 High-concurrency Stripe payment pipelines & sub-second render speeds</p>
-          <p>🔹 <strong>Stack:</strong> Next.js, Three.js, Tailwind CSS, Stripe API, PostgreSQL</p>
+          <p><strong>3D Luxury Jewelry E-Commerce Engine</strong></p>
+          <p>Real-time 3D ring visualizers and custom gemstone configurators with high-concurrency Stripe payment pipelines.</p>
+          <p><strong>Stack:</strong> Next.js, Three.js, Tailwind CSS, Stripe API</p>
+        </div>
+      </td>
+      <td width="33.33%" valign="top">
+        <h3 align="center">MetaZik</h3>
+        <div align="center">
+          <p><strong>Hi-Res Audio Streaming Platform</strong></p>
+          <p>Lossless audio streaming architecture with real-time synchronized lyrics and collaborative playlist orchestration.</p>
+          <p><strong>Stack:</strong> React Native, Node.js, MongoDB, WebAudio</p>
         </div>
       </td>
     </tr>
     <tr>
-      <td width="33%" valign="top">
-        <h3 align="center">🎵 MetaZik</h3>
-        <div align="center">
-          <p><strong>Hi-Res Audio Discovery Platform</strong></p>
-          <p>🔹 Lossless streaming & synchronized lyrics</p>
-          <p>🔹 Collaborative real-time playlist engine</p>
-          <p>🔹 <strong>Stack:</strong> React Native, Node.js, MongoDB</p>
-        </div>
-      </td>
-      <td width="33%" valign="top">
-        <h3 align="center">🏗️ NeoInfra AI</h3>
+      <td width="33.33%" valign="top">
+        <h3 align="center">NeoInfra AI</h3>
         <div align="center">
           <p><strong>Generative 3D Architecture Pipeline</strong></p>
-          <p>🔹 Prompt-to-3D neural generative asset synthesis</p>
-          <p>🔹 Multi-format 3D spatial exports</p>
-          <p>🔹 <strong>Stack:</strong> Python, Three.js, PyTorch, FastAPI</p>
+          <p>Neural pipeline translating text prompts into spatial 3D models and architectural blueprints with multi-format export.</p>
+          <p><strong>Stack:</strong> Python, Three.js, PyTorch, FastAPI</p>
         </div>
       </td>
-      <td width="33%" valign="top">
-        <h3 align="center">⚡ Ostra AI (IDE)</h3>
+      <td width="33.33%" valign="top">
+        <h3 align="center">Ostra AI</h3>
         <div align="center">
-          <p><strong>Cloud & Desktop IDE Ecosystem</strong></p>
-          <p>🔹 AI-assisted refactoring & autonomous code editing</p>
-          <p>🔹 Native Electron & Web integration</p>
-          <p>🔹 <strong>Stack:</strong> React 19, Electron, TypeScript, LLMs</p>
+          <p><strong>Agentic Developer IDE Ecosystem</strong></p>
+          <p>Intelligent development workspace with autonomous code editing, semantic AST refactoring, and project indexing.</p>
+          <p><strong>Stack:</strong> React 19, Electron, TypeScript, LLM Agents</p>
+        </div>
+      </td>
+      <td width="33.33%" valign="top">
+        <h3 align="center">Lustrous AI</h3>
+        <div align="center">
+          <p><strong>Autonomous Conversational Agent</strong></p>
+          <p>Enterprise AI assistant system with OAuth2 security, persistent state management, and low-latency API execution.</p>
+          <p><strong>Stack:</strong> Python, FastAPI, React, Redis, LangChain</p>
         </div>
       </td>
     </tr>
@@ -151,31 +154,31 @@ interface DeveloperProfile {
 
 ---
 
-## ⚡ Technology Arsenal
+## <img src="https://img.icons8.com/material-rounded/24/6366f1/circuit.png" width="22" height="22" style="vertical-align: middle;" /> Technology Arsenal
 
 <div align="center">
 
-### 🧠 **Core Languages**
+### Core Languages
 <p>
   <img src="https://skillicons.dev/icons?i=python,ts,js,cpp,cs,c&theme=dark" alt="Core Languages"/>
 </p>
 
-### 🎨 **Frontend & Spatial WebGL**
+### Frontend &amp; Spatial WebGL
 <p>
-  <img src="https://skillicons.dev/icons?i=react,nextjs,threejs,tailwind,vite,html,css&theme=dark" alt="Frontend & Spatial WebGL"/>
+  <img src="https://skillicons.dev/icons?i=react,nextjs,threejs,tailwind,vite,html,css&theme=dark" alt="Frontend and Spatial WebGL"/>
 </p>
 
-### ⚙️ **Backend, Microservices & Agentic AI**
+### Backend, Microservices &amp; Agentic AI
 <p>
-  <img src="https://skillicons.dev/icons?i=fastapi,flask,nodejs,express,django&theme=dark" alt="Backend & Microservices"/>
+  <img src="https://skillicons.dev/icons?i=fastapi,flask,nodejs,express,django&theme=dark" alt="Backend and Microservices"/>
 </p>
 
-### 🗄️ **Databases, Caching & Cloud Infrastructure**
+### Databases, Caching &amp; Cloud Infrastructure
 <p>
-  <img src="https://skillicons.dev/icons?i=mongodb,postgresql,mysql,redis,docker,git&theme=dark" alt="Databases & Infrastructure"/>
+  <img src="https://skillicons.dev/icons?i=mongodb,postgresql,mysql,redis,docker,git&theme=dark" alt="Databases and Infrastructure"/>
 </p>
 
-### 🤖 **AI, Machine Learning & Vector Orchestration**
+### AI, Machine Learning &amp; Vector Orchestration
 <p>
   <img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white" alt="PyTorch"/>
   <img src="https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white" alt="TensorFlow"/>
@@ -190,7 +193,7 @@ interface DeveloperProfile {
 
 ---
 
-## 🐍 Contribution Activity
+## <img src="https://img.icons8.com/material-rounded/24/6366f1/activity.png" width="22" height="22" style="vertical-align: middle;" /> Contribution Activity
 
 <div align="center">
   <picture>
@@ -202,7 +205,7 @@ interface DeveloperProfile {
 
 ---
 
-## 📈 GitHub Metrics & Telemetry
+## <img src="https://img.icons8.com/material-rounded/24/6366f1/bar-chart.png" width="22" height="22" style="vertical-align: middle;" /> GitHub Telemetry &amp; Metrics
 
 <div align="center">
   <img src="https://github-readme-stats.vercel.app/api?username=DarkcodiX&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=6366F1&icon_color=00D9FF" alt="Darkcodix GitHub Stats" height="175"/>
@@ -211,11 +214,11 @@ interface DeveloperProfile {
 
 ---
 
-## 🌐 Connect & Collaborate
+## <img src="https://img.icons8.com/material-rounded/24/6366f1/globe.png" width="22" height="22" style="vertical-align: middle;" /> Connect &amp; Collaborate
 
 <div align="center">
   <a href="https://darkcodix.dedyn.io/" target="_blank">
-    <img src="https://img.shields.io/badge/🌍_Live_Portfolio-6366F1?style=for-the-badge&logoColor=white" alt="Portfolio"/>
+    <img src="https://img.shields.io/badge/Live_Portfolio-6366F1?style=for-the-badge&logoColor=white" alt="Portfolio"/>
   </a>
   <a href="https://www.linkedin.com/in/dark-codix-b4a697375/" target="_blank">
     <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"/>
@@ -233,5 +236,5 @@ interface DeveloperProfile {
 <div align="center">
   <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=120&section=footer&text=&fontSize=0" width="100%"/>
   <br>
-  <h3>⭐ Thanks for visiting! Let's engineer the future together ⭐</h3>
+  <h3>Thanks for visiting! Let's engineer the future together</h3>
 </div>
